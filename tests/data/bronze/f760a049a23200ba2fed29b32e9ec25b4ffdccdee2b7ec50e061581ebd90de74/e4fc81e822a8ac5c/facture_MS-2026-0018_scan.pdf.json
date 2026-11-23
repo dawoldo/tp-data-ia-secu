@@ -1,0 +1,83 @@
+{
+  "format": 2,
+  "source": "facture_MS-2026-0018_scan.pdf",
+  "origin": {
+    "s3_key": "facture_MS-2026-0018_scan.pdf",
+    "etag": "\"30a953d3eba818406c149ef127960355\"",
+    "last_modified": "2026-11-23T10:27:03+00:00",
+    "pulled_at": "2026-11-23T14:11:23+00:00"
+  },
+  "sha256": "f760a049a23200ba2fed29b32e9ec25b4ffdccdee2b7ec50e061581ebd90de74",
+  "size": 298282,
+  "kind": "image",
+  "page_count": 1,
+  "repaired": false,
+  "settings": {
+    "ocr": {
+      "engine": "lightonocr",
+      "model": "lightonocr-3-1b-test",
+      "max_side": 1540,
+      "image_format": "png",
+      "max_tokens": 4096,
+      "temperature": 0.2,
+      "top_p": 0.9
+    }
+  },
+  "converted_at": "2026-11-23T14:16:18.872+00:00",
+  "pages": [
+    {
+      "page": 1,
+      "kind": "image",
+      "reason": "full-page image",
+      "visible_chars": 0,
+      "hidden_chars": 0,
+      "unreadable_ratio": 0.0,
+      "image_coverage": 1.0,
+      "method": "ocr",
+      "seconds": 5.91,
+      "image_sha256": "0f551c7a7d934b3318feab7c0f80511b943cc9e5e0c8c753f697427d54b936d8",
+      "ocr_response": {
+        "id": "chatcmpl-401504ef-2703-4b2d-9450-51b316905ae1",
+        "object": "chat.completion",
+        "created": 1795443375,
+        "model": "lightonocr-3-1b-test",
+        "choices": [
+          {
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "# FACTURE\n\n**Maury S.A.R.L.**  \nrue Carpentier  \n29617 Michel-sur-Guilbert  \nSIRET : 10433218438637  \nTVA intracom. : FR94104332184  \n\n---\n\n**Numéro de facture** : MS-2026-0018  \n**Date d'émission** : 16/02/2026  \n**Date d'échéance** : 17/04/2026  \n**Catégorie** : Informatique  \n**Statut** : Payée  \n\n---\n\n**Facturé à** :  \nClient : Joly SA  \navenue Gabriel Pereira  \n30650 Chevallier  \nSIRET client : 85931746375869  \n\n---\n\n<table>\n  <thead>\n    <tr>\n      <th>Désignation</th>\n      <th>Qté</th>\n      <th>Prix unitaire HT</th>\n      <th>TVA</th>\n      <th>Total HT</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td>Station d'accueil USB-C</td>\n      <td>12</td>\n      <td>179,97 €</td>\n      <td>20 %</td>\n      <td>2 159,64 €</td>\n    </tr>\n  </tbody>\n</table>\n\n---\n\n**Total HT** 2 159,64 €  \n**TVA 20 %** 431,93 €  \n**Total TVA** 431,93 €  \n**Total TTC** 2 591,57 €  \n\n---\n\n**Mode de paiement** : Virement bancaire  \n**IBAN** : FR5002654235116155940781618  \nEn cas de retard de paiement, une indemnité forfaitaire de 40 € pour frais de recouvrement sera exigée (art. L441-10 du Code de commerce).\n",
+              "refusal": null,
+              "annotations": null,
+              "audio": null,
+              "function_call": null,
+              "reasoning": null
+            },
+            "logprobs": null,
+            "finish_reason": "stop",
+            "stop_reason": null,
+            "token_ids": null,
+            "routed_experts": null,
+            "weight_versions": null
+          }
+        ],
+        "service_tier": null,
+        "system_fingerprint": "vllm-0.33.0-25ec7f27",
+        "usage": {
+          "prompt_tokens": 2157,
+          "total_tokens": 2655,
+          "completion_tokens": 498,
+          "prompt_tokens_details": null,
+          "completion_tokens_details": null
+        },
+        "prompt_logprobs": null,
+        "prompt_token_ids": null,
+        "prompt_text": null,
+        "kv_transfer_params": null,
+        "ec_transfer_params": null,
+        "metrics": null
+      }
+    }
+  ],
+  "markdown_sha256": "10644333ebca917ee2272ebfe98c613c104d42e7ce21cb662091324833258123"
+}

@@ -1,0 +1,37 @@
+{
+  "format": 2,
+  "source": "facture_BS-2026-0004_texte.pdf",
+  "origin": {
+    "s3_key": "facture_BS-2026-0004_texte.pdf",
+    "etag": "\"93402d18573e93a8b9d506f0c1f072d7\"",
+    "last_modified": "2026-11-23T10:26:47+00:00",
+    "pulled_at": "2026-11-23T14:11:17+00:00"
+  },
+  "sha256": "569f17be4cc8ac97cab9c7a730f1b81c4550e7f9a7391cdbf4bdf457bfd3938a",
+  "size": 3034,
+  "kind": "text",
+  "page_count": 1,
+  "repaired": false,
+  "settings": {
+    "text": {
+      "engine": "pymupdf",
+      "version": "2.1",
+      "layout": false
+    }
+  },
+  "converted_at": "2026-11-23T14:12:03.736+00:00",
+  "pages": [
+    {
+      "page": 1,
+      "kind": "text",
+      "reason": "text layer",
+      "visible_chars": 712,
+      "hidden_chars": 0,
+      "unreadable_ratio": 0.0,
+      "image_coverage": 0.0,
+      "missing_words": [],
+      "method": "text"
+    }
+  ],
+  "markdown_sha256": "b2f392f06a61ed2337cffdb913130492a44f9c3c127808947e0c93520bf32cfc"
+}

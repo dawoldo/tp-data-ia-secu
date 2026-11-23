@@ -1,0 +1,83 @@
+{
+  "format": 2,
+  "source": "facture_LG-2025-0005_scan.pdf",
+  "origin": {
+    "s3_key": "facture_LG-2025-0005_scan.pdf",
+    "etag": "\"4c03a3780f7992f679d87b681b20bd9f\"",
+    "last_modified": "2026-11-23T10:26:57+00:00",
+    "pulled_at": "2026-11-23T14:11:20+00:00"
+  },
+  "sha256": "0982f533e760a5f001bcdcf516057b0e63f0346f59e843ddcb80a8255948f034",
+  "size": 313406,
+  "kind": "image",
+  "page_count": 1,
+  "repaired": false,
+  "settings": {
+    "ocr": {
+      "engine": "lightonocr",
+      "model": "lightonocr-3-1b-test",
+      "max_side": 1540,
+      "image_format": "png",
+      "max_tokens": 4096,
+      "temperature": 0.2,
+      "top_p": 0.9
+    }
+  },
+  "converted_at": "2026-11-23T14:14:37.811+00:00",
+  "pages": [
+    {
+      "page": 1,
+      "kind": "image",
+      "reason": "full-page image",
+      "visible_chars": 0,
+      "hidden_chars": 0,
+      "unreadable_ratio": 0.0,
+      "image_coverage": 1.0,
+      "method": "ocr",
+      "seconds": 7.88,
+      "image_sha256": "35b422e75cd25fc998e749533e54136c266cf5a558eeb64146ff45ac85026d91",
+      "ocr_response": {
+        "id": "chatcmpl-32cdfa7f-649b-4fd4-b3d5-f4ca164b2188",
+        "object": "chat.completion",
+        "created": 1795443272,
+        "model": "lightonocr-3-1b-test",
+        "choices": [
+          {
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "Le Gall  \n4, rue de Clément  \n93597 Saint Gilbertdan  \nSIRET : 88095701482489  \nTVA intracom. : FR63880957014  \n\n# FACTURE\n\nNuméro de facture : LG-2025-0005  \nDate d'émission : 05/09/2025  \nDate d'échéance : 04/11/2025  \nCatégorie : Informatique  \nStatut : Payée  \n\n**Facturé à :**  \nClient : Lombard  \n86, rue William Bègue  \n88105 Sainte Matthieu-les-Bains  \nSIRET client : 20037917087083  \n\n<table>\n  <thead>\n    <tr>\n      <th>Désignation</th>\n      <th>Qté</th>\n      <th>Prix unitaire HT</th>\n      <th>TVA</th>\n      <th>Total HT</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td>Disque SSD externe 2 To</td>\n      <td>11</td>\n      <td>155,95 €</td>\n      <td>20 %</td>\n      <td>1 715,45 €</td>\n    </tr>\n    <tr>\n      <td>Écran 27 pouces QHD</td>\n      <td>8</td>\n      <td>349,66 €</td>\n      <td>20 %</td>\n      <td>2 797,28 €</td>\n    </tr>\n    <tr>\n      <td>Licence logiciel bureautique annuelle</td>\n      <td>2</td>\n      <td>99,60 €</td>\n      <td>20 %</td>\n      <td>199,20 €</td>\n    </tr>\n    <tr>\n      <td>Station d'accueil USB-C</td>\n      <td>7</td>\n      <td>158,18 €</td>\n      <td>20 %</td>\n      <td>1 107,26 €</td>\n    </tr>\n  </tbody>\n</table>\n\n<table>\n  <tbody>\n    <tr>\n      <td>Total HT</td>\n      <td>5 819,19 €</td>\n    </tr>\n    <tr>\n      <td>TVA 20 %</td>\n      <td>1 163,84 €</td>\n    </tr>\n    <tr>\n      <td>Total TVA</td>\n      <td>1 163,84 €</td>\n    </tr>\n    <tr>\n      <td>Total TTC</td>\n      <td>6 983,03 €</td>\n    </tr>\n  </tbody>\n</table>\n\nMode de paiement : Carte bancaire  \nIBAN : FR2383465787133150983930103  \nEn cas de retard de paiement, une indemnité forfaitaire de 40 € pour frais de recouvrement sera exigée (art. L441-10 du Code de commerce).\n",
+              "refusal": null,
+              "annotations": null,
+              "audio": null,
+              "function_call": null,
+              "reasoning": null
+            },
+            "logprobs": null,
+            "finish_reason": "stop",
+            "stop_reason": null,
+            "token_ids": null,
+            "routed_experts": null,
+            "weight_versions": null
+          }
+        ],
+        "service_tier": null,
+        "system_fingerprint": "vllm-0.33.0-25ec7f27",
+        "usage": {
+          "prompt_tokens": 2157,
+          "total_tokens": 2931,
+          "completion_tokens": 774,
+          "prompt_tokens_details": null,
+          "completion_tokens_details": null
+        },
+        "prompt_logprobs": null,
+        "prompt_token_ids": null,
+        "prompt_text": null,
+        "kv_transfer_params": null,
+        "ec_transfer_params": null,
+        "metrics": null
+      }
+    }
+  ],
+  "markdown_sha256": "61a3015b231722f8f89a319e5841afc18a19dd3cbd7d4efbe955cb1fd372852b"
+}

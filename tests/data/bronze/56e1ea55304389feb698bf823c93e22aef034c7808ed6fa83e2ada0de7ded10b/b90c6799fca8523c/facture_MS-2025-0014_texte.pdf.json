@@ -1,0 +1,37 @@
+{
+  "format": 2,
+  "source": "facture_MS-2025-0014_texte.pdf",
+  "origin": {
+    "s3_key": "facture_MS-2025-0014_texte.pdf",
+    "etag": "\"c753fe179bdc5e7513840c525674c61f\"",
+    "last_modified": "2026-11-23T10:27:01+00:00",
+    "pulled_at": "2026-11-23T14:11:22+00:00"
+  },
+  "sha256": "56e1ea55304389feb698bf823c93e22aef034c7808ed6fa83e2ada0de7ded10b",
+  "size": 2796,
+  "kind": "text",
+  "page_count": 1,
+  "repaired": false,
+  "settings": {
+    "text": {
+      "engine": "pymupdf",
+      "version": "2.1",
+      "layout": false
+    }
+  },
+  "converted_at": "2026-11-23T14:15:44.535+00:00",
+  "pages": [
+    {
+      "page": 1,
+      "kind": "text",
+      "reason": "text layer",
+      "visible_chars": 617,
+      "hidden_chars": 0,
+      "unreadable_ratio": 0.0,
+      "image_coverage": 0.0,
+      "missing_words": [],
+      "method": "text"
+    }
+  ],
+  "markdown_sha256": "2128d1459869f12df09ea6bb5b14b50cd0abb680a9e5247369a4ce8caf16c79a"
+}

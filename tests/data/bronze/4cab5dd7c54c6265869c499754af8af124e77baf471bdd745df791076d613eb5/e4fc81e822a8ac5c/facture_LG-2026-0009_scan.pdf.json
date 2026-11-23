@@ -1,0 +1,83 @@
+{
+  "format": 2,
+  "source": "facture_LG-2026-0009_scan.pdf",
+  "origin": {
+    "s3_key": "facture_LG-2026-0009_scan.pdf",
+    "etag": "\"f51bbe7b73d97310402e6e4ed7af1949\"",
+    "last_modified": "2026-11-23T10:26:59+00:00",
+    "pulled_at": "2026-11-23T14:11:21+00:00"
+  },
+  "sha256": "4cab5dd7c54c6265869c499754af8af124e77baf471bdd745df791076d613eb5",
+  "size": 309295,
+  "kind": "image",
+  "page_count": 1,
+  "repaired": false,
+  "settings": {
+    "ocr": {
+      "engine": "lightonocr",
+      "model": "lightonocr-3-1b-test",
+      "max_side": 1540,
+      "image_format": "png",
+      "max_tokens": 4096,
+      "temperature": 0.2,
+      "top_p": 0.9
+    }
+  },
+  "converted_at": "2026-11-23T14:15:12.127+00:00",
+  "pages": [
+    {
+      "page": 1,
+      "kind": "image",
+      "reason": "full-page image",
+      "visible_chars": 0,
+      "hidden_chars": 0,
+      "unreadable_ratio": 0.0,
+      "image_coverage": 1.0,
+      "method": "ocr",
+      "seconds": 6.52,
+      "image_sha256": "2e6c747bc0da40cdcc73958a28cf289542f6025fb52ca9d568bf080256e75899",
+      "ocr_response": {
+        "id": "chatcmpl-02b83538-8e2c-4745-9799-91e36784b59a",
+        "object": "chat.completion",
+        "created": 1795443307,
+        "model": "lightonocr-3-1b-test",
+        "choices": [
+          {
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "Le Gall  \n4, rue de Clément  \n93597 Saint Gilbertdan  \nSIRET : 88095701482489  \nTVA intracom. : FR63880957014  \n\n# FACTURE\n\nNuméro de facture : LG-2026-0009  \nDate d'émission : 06/03/2026  \nDate d'échéance : 05/05/2026  \nCatégorie : Informatique  \nStatut : En retard  \n\n**Facturé à :**  \nClient : Mace S.A.  \n81, chemin Laurence Jacquot  \n50765 Sainte Dominiquenec  \nSIRET client : 89517187457809  \n\n<table>\n  <thead>\n    <tr>\n      <th>Désignation</th>\n      <th>Qté</th>\n      <th>Prix unitaire HT</th>\n      <th>TVA</th>\n      <th>Total HT</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td>Écran 27 pouces QHD</td>\n      <td>12</td>\n      <td>260,63 €</td>\n      <td>20 %</td>\n      <td>3 127,56 €</td>\n    </tr>\n    <tr>\n      <td>Licence logiciel bureautique annuelle</td>\n      <td>10</td>\n      <td>120,74 €</td>\n      <td>20 %</td>\n      <td>1 207,40 €</td>\n    </tr>\n    <tr>\n      <td>Disque SSD externe 2 To</td>\n      <td>1</td>\n      <td>111,45 €</td>\n      <td>20 %</td>\n      <td>111,45 €</td>\n    </tr>\n  </tbody>\n</table>\n\nTotal HT 4 446,41 €  \nTVA 20 % 889,28 €  \nTotal TVA 889,28 €  \n**Total TTC 5 335,69 €**\n\nMode de paiement : Virement bancaire  \nIBAN : FR2383465787133150983930103  \nEn cas de retard de paiement, une indemnité forfaitaire de 40 € pour frais de recouvrement sera exigée (art. L441-10 du Code de commerce).\n",
+              "refusal": null,
+              "annotations": null,
+              "audio": null,
+              "function_call": null,
+              "reasoning": null
+            },
+            "logprobs": null,
+            "finish_reason": "stop",
+            "stop_reason": null,
+            "token_ids": null,
+            "routed_experts": null,
+            "weight_versions": null
+          }
+        ],
+        "service_tier": null,
+        "system_fingerprint": "vllm-0.33.0-25ec7f27",
+        "usage": {
+          "prompt_tokens": 2157,
+          "total_tokens": 2773,
+          "completion_tokens": 616,
+          "prompt_tokens_details": null,
+          "completion_tokens_details": null
+        },
+        "prompt_logprobs": null,
+        "prompt_token_ids": null,
+        "prompt_text": null,
+        "kv_transfer_params": null,
+        "ec_transfer_params": null,
+        "metrics": null
+      }
+    }
+  ],
+  "markdown_sha256": "76f0f176ce5f558737b85d583922fc5ebadcddd6fb7c03bd77443c86035bb085"
+}

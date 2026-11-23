@@ -1,0 +1,83 @@
+{
+  "format": 2,
+  "source": "facture_P-2026-0006_scan.pdf",
+  "origin": {
+    "s3_key": "facture_P-2026-0006_scan.pdf",
+    "etag": "\"50570972852d5718452ca02ffc04246c\"",
+    "last_modified": "2026-11-23T10:27:05+00:00",
+    "pulled_at": "2026-11-23T14:11:23+00:00"
+  },
+  "sha256": "37a4a71515971552c62bad6667ff875f1c29f6649cbcf96427e799bd788f7360",
+  "size": 314288,
+  "kind": "image",
+  "page_count": 1,
+  "repaired": false,
+  "settings": {
+    "ocr": {
+      "engine": "lightonocr",
+      "model": "lightonocr-3-1b-test",
+      "max_side": 1540,
+      "image_format": "png",
+      "max_tokens": 4096,
+      "temperature": 0.2,
+      "top_p": 0.9
+    }
+  },
+  "converted_at": "2026-11-23T14:16:52.915+00:00",
+  "pages": [
+    {
+      "page": 1,
+      "kind": "image",
+      "reason": "full-page image",
+      "visible_chars": 0,
+      "hidden_chars": 0,
+      "unreadable_ratio": 0.0,
+      "image_coverage": 1.0,
+      "method": "ocr",
+      "seconds": 7.88,
+      "image_sha256": "f1cd29bcf4972a70b3eca1a5f0ab8bf7a5f1107c378d651bcaf85face5bf9353",
+      "ocr_response": {
+        "id": "chatcmpl-78aae0c1-ef26-4461-992c-a455eb94e7af",
+        "object": "chat.completion",
+        "created": 1795443407,
+        "model": "lightonocr-3-1b-test",
+        "choices": [
+          {
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "# FACTURE\n\n**Payet**  \n67, rue Albert  \n79676 Saint Élise-sur-Mer  \nSIRET : 98543534684251  \nTVA intracom. : FR35985435346  \n\n**Numéro de facture** : P-2026-0006  \n**Date d'émission** : 29/04/2026  \n**Date d'échéance** : 29/05/2026  \n**Catégorie** : Informatique  \n**Statut** : En retard  \n\n**Facturé à** :  \nClient : Joly SA  \navenue Gabriel Pereira  \n30650 Chevallier  \nSIRET client : 85931746375869  \n\n<table>\n  <thead>\n    <tr>\n      <th>Désignation</th>\n      <th>Qté</th>\n      <th>Prix unitaire HT</th>\n      <th>TVA</th>\n      <th>Total HT</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td>Disque SSD externe 2 To</td>\n      <td>10</td>\n      <td>139,66 €</td>\n      <td>20 %</td>\n      <td>1 396,60 €</td>\n    </tr>\n    <tr>\n      <td>Écran 27 pouces QHD</td>\n      <td>3</td>\n      <td>363,17 €</td>\n      <td>20 %</td>\n      <td>1 089,51 €</td>\n    </tr>\n    <tr>\n      <td>Station d'accueil USB-C</td>\n      <td>5</td>\n      <td>166,27 €</td>\n      <td>20 %</td>\n      <td>831,35 €</td>\n    </tr>\n    <tr>\n      <td>Ordinateur portable Pro 14 pouces</td>\n      <td>7</td>\n      <td>1 102,93 €</td>\n      <td>20 %</td>\n      <td>7 720,51 €</td>\n    </tr>\n  </tbody>\n</table>\n\n<table>\n  <tbody>\n    <tr>\n      <td>Total HT</td>\n      <td>11 037,97 €</td>\n    </tr>\n    <tr>\n      <td>TVA 20 %</td>\n      <td>2 207,59 €</td>\n    </tr>\n    <tr>\n      <td>Total TVA</td>\n      <td>2 207,59 €</td>\n    </tr>\n    <tr>\n      <td>Total TTC</td>\n      <td>13 245,56 €</td>\n    </tr>\n  </tbody>\n</table>\n\n**Mode de paiement** : Carte bancaire  \n**IBAN** : FR2142784980841241182449353  \nEn cas de retard de paiement, une indemnité forfaitaire de 40 € pour frais de recouvrement sera exigée (art. L441-10 du Code de commerce).\n",
+              "refusal": null,
+              "annotations": null,
+              "audio": null,
+              "function_call": null,
+              "reasoning": null
+            },
+            "logprobs": null,
+            "finish_reason": "stop",
+            "stop_reason": null,
+            "token_ids": null,
+            "routed_experts": null,
+            "weight_versions": null
+          }
+        ],
+        "service_tier": null,
+        "system_fingerprint": "vllm-0.33.0-25ec7f27",
+        "usage": {
+          "prompt_tokens": 2157,
+          "total_tokens": 2950,
+          "completion_tokens": 793,
+          "prompt_tokens_details": null,
+          "completion_tokens_details": null
+        },
+        "prompt_logprobs": null,
+        "prompt_token_ids": null,
+        "prompt_text": null,
+        "kv_transfer_params": null,
+        "ec_transfer_params": null,
+        "metrics": null
+      }
+    }
+  ],
+  "markdown_sha256": "40c11990681b1724590f879ffe191499739e0577c30509b5e827b163a96d00de"
+}

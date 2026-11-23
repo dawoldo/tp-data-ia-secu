@@ -1,0 +1,83 @@
+{
+  "format": 2,
+  "source": "facture_GPE-2026-0016_scan.pdf",
+  "origin": {
+    "s3_key": "facture_GPE-2026-0016_scan.pdf",
+    "etag": "\"93916a04313a853b8cccd563bb14bd70\"",
+    "last_modified": "2026-11-23T10:26:57+00:00",
+    "pulled_at": "2026-11-23T14:11:20+00:00"
+  },
+  "sha256": "279bd41bc4db2e710bc872df952bd4f16450de7b4d65a3a9202c6853c3125408",
+  "size": 297418,
+  "kind": "image",
+  "page_count": 1,
+  "repaired": false,
+  "settings": {
+    "ocr": {
+      "engine": "lightonocr",
+      "model": "lightonocr-3-1b-test",
+      "max_side": 1540,
+      "image_format": "png",
+      "max_tokens": 4096,
+      "temperature": 0.2,
+      "top_p": 0.9
+    }
+  },
+  "converted_at": "2026-11-23T14:14:28.931+00:00",
+  "pages": [
+    {
+      "page": 1,
+      "kind": "image",
+      "reason": "full-page image",
+      "visible_chars": 0,
+      "hidden_chars": 0,
+      "unreadable_ratio": 0.0,
+      "image_coverage": 1.0,
+      "method": "ocr",
+      "seconds": 5.89,
+      "image_sha256": "aaa7d3241d8785248dabe38800264e62dae9c2b9735a1f4f31ae3728926f151a",
+      "ocr_response": {
+        "id": "chatcmpl-5ff9ff83-1eca-4839-b1a6-69698e82fec0",
+        "object": "chat.completion",
+        "created": 1795443265,
+        "model": "lightonocr-3-1b-test",
+        "choices": [
+          {
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "# FACTURE\n\n**Gimenez Payet et Fils**  \n873, rue Étienne Pereira  \n84541 Briand  \nSIRET : 10518347967010  \nTVA intracom. : FR65105183479  \n\n---\n\n**Numéro de facture** : GPE-2026-0016  \n**Date d'émission** : 08/04/2026  \n**Date d'échéance** : 23/04/2026  \n**Catégorie** : Informatique  \n**Statut** : Payée  \n\n---\n\n**Facturé à** :  \nClient : Foucher  \n5, avenue Jérôme Bourgeois  \n17905 Poulain-la-Forêt  \nSIRET client : 42104709324745  \n\n---\n\n<table>\n  <thead>\n    <tr>\n      <th>Désignation</th>\n      <th>Qté</th>\n      <th>Prix unitaire HT</th>\n      <th>TVA</th>\n      <th>Total HT</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td>Licence logiciel bureautique annuelle</td>\n      <td>5</td>\n      <td>84,37 €</td>\n      <td>20 %</td>\n      <td>421,85 €</td>\n    </tr>\n  </tbody>\n</table>\n\n---\n\n**Total HT** 421,85 €  \n**TVA 20 %** 84,37 €  \n**Total TVA** 84,37 €  \n**Total TTC** 506,22 €  \n\n---\n\n**Mode de paiement** : Chèque  \n**IBAN** : FR4513338726247317810801326  \n\nEn cas de retard de paiement, une indemnité forfaitaire de 40 € pour frais de recouvrement sera exigée (art. L441-10 du Code de commerce).\n",
+              "refusal": null,
+              "annotations": null,
+              "audio": null,
+              "function_call": null,
+              "reasoning": null
+            },
+            "logprobs": null,
+            "finish_reason": "stop",
+            "stop_reason": null,
+            "token_ids": null,
+            "routed_experts": null,
+            "weight_versions": null
+          }
+        ],
+        "service_tier": null,
+        "system_fingerprint": "vllm-0.33.0-25ec7f27",
+        "usage": {
+          "prompt_tokens": 2157,
+          "total_tokens": 2655,
+          "completion_tokens": 498,
+          "prompt_tokens_details": null,
+          "completion_tokens_details": null
+        },
+        "prompt_logprobs": null,
+        "prompt_token_ids": null,
+        "prompt_text": null,
+        "kv_transfer_params": null,
+        "ec_transfer_params": null,
+        "metrics": null
+      }
+    }
+  ],
+  "markdown_sha256": "844356ede18aa4d0b2b1c39e3192368a6ae1dabd1859154b8d04fa44cfb55a2f"
+}

@@ -1,0 +1,83 @@
+{
+  "format": 2,
+  "source": "facture_C-2025-0003_scan.pdf",
+  "origin": {
+    "s3_key": "facture_C-2025-0003_scan.pdf",
+    "etag": "\"17f79d5737211d6df03d5aba3276c99f\"",
+    "last_modified": "2026-11-23T10:26:49+00:00",
+    "pulled_at": "2026-11-23T14:11:18+00:00"
+  },
+  "sha256": "ef4da34fd783ea4a80d1c5b9547ce039dc641591053a4b1b6283e500e757b956",
+  "size": 304742,
+  "kind": "image",
+  "page_count": 1,
+  "repaired": false,
+  "settings": {
+    "ocr": {
+      "engine": "lightonocr",
+      "model": "lightonocr-3-1b-test",
+      "max_side": 1540,
+      "image_format": "png",
+      "max_tokens": 4096,
+      "temperature": 0.2,
+      "top_p": 0.9
+    }
+  },
+  "converted_at": "2026-11-23T14:12:33.757+00:00",
+  "pages": [
+    {
+      "page": 1,
+      "kind": "image",
+      "reason": "full-page image",
+      "visible_chars": 0,
+      "hidden_chars": 0,
+      "unreadable_ratio": 0.0,
+      "image_coverage": 1.0,
+      "method": "ocr",
+      "seconds": 6.07,
+      "image_sha256": "2dd4864f1e87b8b43685161b8f0b3d8df259fa14e93cee270807037bcc9355bb",
+      "ocr_response": {
+        "id": "chatcmpl-0bd79b7c-0cd9-4f29-92dc-5303589356ad",
+        "object": "chat.completion",
+        "created": 1795443149,
+        "model": "lightonocr-3-1b-test",
+        "choices": [
+          {
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "Chevalier  \n7, avenue Luce Marchal  \n20479 Lacroix  \nSIRET : 49593103241928  \nTVA intracom. : FR32495931032  \n\n# FACTURE\n\nNuméro de facture : C-2025-0003  \nDate d'émission : 02/06/2025  \nDate d'échéance : 17/06/2025  \nCatégorie : Maintenance  \nStatut : Payée  \n\nFacturé à :  \nClient : Lombard  \n86, rue William Bègue  \n88105 Sainte Matthieu-les-Bains  \nSIRET client : 20037917087083  \n\n<table>\n  <thead>\n    <tr>\n      <th>Désignation</th>\n      <th>Qté</th>\n      <th>Prix unitaire HT</th>\n      <th>TVA</th>\n      <th>Total HT</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td>Remplacement pièce détachée</td>\n      <td>7</td>\n      <td>57,30 €</td>\n      <td>20 %</td>\n      <td>401,10 €</td>\n    </tr>\n    <tr>\n      <td>Intervention technicien sur site</td>\n      <td>5</td>\n      <td>214,81 €</td>\n      <td>20 %</td>\n      <td>1 074,05 €</td>\n    </tr>\n  </tbody>\n</table>\n\nTotal HT 1 475,15 €  \nTVA 20 % 295,03 €  \nTotal TVA 295,03 €  \n**Total TTC 1 770,18 €**\n\nMode de paiement : Carte bancaire  \nIBAN : FR5476483503056413953767242  \nEn cas de retard de paiement, une indemnité forfaitaire de 40 € pour frais de recouvrement sera exigée (art. L441-10 du Code de commerce).\n",
+              "refusal": null,
+              "annotations": null,
+              "audio": null,
+              "function_call": null,
+              "reasoning": null
+            },
+            "logprobs": null,
+            "finish_reason": "stop",
+            "stop_reason": null,
+            "token_ids": null,
+            "routed_experts": null,
+            "weight_versions": null
+          }
+        ],
+        "service_tier": null,
+        "system_fingerprint": "vllm-0.33.0-25ec7f27",
+        "usage": {
+          "prompt_tokens": 2157,
+          "total_tokens": 2691,
+          "completion_tokens": 534,
+          "prompt_tokens_details": null,
+          "completion_tokens_details": null
+        },
+        "prompt_logprobs": null,
+        "prompt_token_ids": null,
+        "prompt_text": null,
+        "kv_transfer_params": null,
+        "ec_transfer_params": null,
+        "metrics": null
+      }
+    }
+  ],
+  "markdown_sha256": "c9a84d9580c64fcfdd31adc8e5dcb193b5d88d0f601cd61f04ad7dfff7d35b6e"
+}

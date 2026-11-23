@@ -1,0 +1,83 @@
+{
+  "format": 2,
+  "source": "facture_P-2025-0002_scan.pdf",
+  "origin": {
+    "s3_key": "facture_P-2025-0002_scan.pdf",
+    "etag": "\"828f6eb42807352ada7d85d42f627e4d\"",
+    "last_modified": "2026-11-23T10:27:03+00:00",
+    "pulled_at": "2026-11-23T14:11:23+00:00"
+  },
+  "sha256": "4439bd107edb3a1d896ed5356b4aec12ff557e5c3553cd3b2ed9c6ee336b7441",
+  "size": 316128,
+  "kind": "image",
+  "page_count": 1,
+  "repaired": false,
+  "settings": {
+    "ocr": {
+      "engine": "lightonocr",
+      "model": "lightonocr-3-1b-test",
+      "max_side": 1540,
+      "image_format": "png",
+      "max_tokens": 4096,
+      "temperature": 0.2,
+      "top_p": 0.9
+    }
+  },
+  "converted_at": "2026-11-23T14:16:27.095+00:00",
+  "pages": [
+    {
+      "page": 1,
+      "kind": "image",
+      "reason": "full-page image",
+      "visible_chars": 0,
+      "hidden_chars": 0,
+      "unreadable_ratio": 0.0,
+      "image_coverage": 1.0,
+      "method": "ocr",
+      "seconds": 7.48,
+      "image_sha256": "52e4fda8c931e5ec033855415765aee5327a9e255e1a79324721a14abb32f983",
+      "ocr_response": {
+        "id": "chatcmpl-86ad1e3a-0927-49c6-9493-435aef35cb67",
+        "object": "chat.completion",
+        "created": 1795443381,
+        "model": "lightonocr-3-1b-test",
+        "choices": [
+          {
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "# FACTURE\n\n**Payet**  \n67, rue Albert  \n79676 Saint Élise-sur-Mer  \nSIRET : 98543534684251  \nTVA intracom. : FR35985435346  \n\n**Numéro de facture** : P-2025-0002  \n**Date d'émission** : 28/06/2025  \n**Date d'échéance** : 12/08/2025  \n**Catégorie** : Informatique  \n**Statut** : En retard  \n\n---\n\n**Facturé à** :  \nClient : Mace S.A.  \n81, chemin Laurence Jacquot  \n50765 Sainte Dominiquenec  \nSIRET client : 89517187457809  \n\n---\n\n<table>\n  <thead>\n    <tr>\n      <th>Désignation</th>\n      <th>Qté</th>\n      <th>Prix unitaire HT</th>\n      <th>TVA</th>\n      <th>Total HT</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td>Disque SSD externe 2 To</td>\n      <td>4</td>\n      <td>133,39 €</td>\n      <td>20 %</td>\n      <td>533,56 €</td>\n    </tr>\n    <tr>\n      <td>Ordinateur portable Pro 14 pouces</td>\n      <td>10</td>\n      <td>1 263,00 €</td>\n      <td>20 %</td>\n      <td>12 630,00 €</td>\n    </tr>\n    <tr>\n      <td>Écran 27 pouces QHD</td>\n      <td>6</td>\n      <td>287,35 €</td>\n      <td>20 %</td>\n      <td>1 724,10 €</td>\n    </tr>\n    <tr>\n      <td>Licence logiciel bureautique annuelle</td>\n      <td>8</td>\n      <td>126,29 €</td>\n      <td>20 %</td>\n      <td>1 010,32 €</td>\n    </tr>\n  </tbody>\n</table>\n\n---\n\n**Total HT** 15 897,98 €  \n**TVA 20 %** 3 179,60 €  \n**Total TVA** 3 179,60 €  \n**Total TTC** 19 077,58 €  \n\n---\n\n**Mode de paiement** : Chèque  \n**IBAN** : FR2142784980841241182449353  \nEn cas de retard de paiement, une indemnité forfaitaire de 40 € pour frais de recouvrement sera exigée (art. L441-10 du Code de commerce).\n",
+              "refusal": null,
+              "annotations": null,
+              "audio": null,
+              "function_call": null,
+              "reasoning": null
+            },
+            "logprobs": null,
+            "finish_reason": "stop",
+            "stop_reason": null,
+            "token_ids": null,
+            "routed_experts": null,
+            "weight_versions": null
+          }
+        ],
+        "service_tier": null,
+        "system_fingerprint": "vllm-0.33.0-25ec7f27",
+        "usage": {
+          "prompt_tokens": 2157,
+          "total_tokens": 2882,
+          "completion_tokens": 725,
+          "prompt_tokens_details": null,
+          "completion_tokens_details": null
+        },
+        "prompt_logprobs": null,
+        "prompt_token_ids": null,
+        "prompt_text": null,
+        "kv_transfer_params": null,
+        "ec_transfer_params": null,
+        "metrics": null
+      }
+    }
+  ],
+  "markdown_sha256": "9c57199be812a117363aa1cf880b2142d4581445c868a7634f40d21392138e73"
+}

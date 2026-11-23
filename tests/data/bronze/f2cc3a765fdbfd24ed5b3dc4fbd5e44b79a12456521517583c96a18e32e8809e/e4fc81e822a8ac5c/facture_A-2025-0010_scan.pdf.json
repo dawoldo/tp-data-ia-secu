@@ -1,0 +1,83 @@
+{
+  "format": 2,
+  "source": "facture_A-2025-0010_scan.pdf",
+  "origin": {
+    "s3_key": "facture_A-2025-0010_scan.pdf",
+    "etag": "\"354b079759040f36d117658434e1f8d0\"",
+    "last_modified": "2026-11-23T10:26:45+00:00",
+    "pulled_at": "2026-11-23T11:46:15+00:00"
+  },
+  "sha256": "f2cc3a765fdbfd24ed5b3dc4fbd5e44b79a12456521517583c96a18e32e8809e",
+  "size": 299461,
+  "kind": "image",
+  "page_count": 1,
+  "repaired": false,
+  "settings": {
+    "ocr": {
+      "engine": "lightonocr",
+      "model": "lightonocr-3-1b-test",
+      "max_side": 1540,
+      "image_format": "png",
+      "max_tokens": 4096,
+      "temperature": 0.2,
+      "top_p": 0.9
+    }
+  },
+  "converted_at": "2026-11-23T14:06:51.223+00:00",
+  "pages": [
+    {
+      "page": 1,
+      "kind": "image",
+      "reason": "full-page image",
+      "visible_chars": 0,
+      "hidden_chars": 0,
+      "unreadable_ratio": 0.0,
+      "image_coverage": 1.0,
+      "method": "ocr",
+      "seconds": 5.97,
+      "image_sha256": "e8f061fb40a8f7d929938b134fd3112b1132e7767892c2cbf1caaf98e6a1b33d",
+      "ocr_response": {
+        "id": "chatcmpl-eacf8403-b3a7-4d6b-bd46-502a2600343e",
+        "object": "chat.completion",
+        "created": 1795442807,
+        "model": "lightonocr-3-1b-test",
+        "choices": [
+          {
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "# FACTURE\n\n**Aubry**  \n96, avenue de Meyer  \n24403 Boyer  \nSIRET : 77360260298050  \nTVA intracom. : FR09773602602  \n\n---\n\n**Numéro de facture** : A-2025-0010  \n**Date d'émission** : 01/06/2025  \n**Date d'échéance** : 16/06/2025  \n**Catégorie** : Conseil  \n**Statut** : En retard  \n\n---\n\n**Facturé à** :  \nClient : Muller  \n2, boulevard de Fabre  \n48529 Leblanc-les-Bains  \nSIRET client : 44550229754599  \n\n---\n\n<table>\n  <thead>\n    <tr>\n      <th>Désignation</th>\n      <th>Qté</th>\n      <th>Prix unitaire HT</th>\n      <th>TVA</th>\n      <th>Total HT</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td>Atelier de cadrage projet</td>\n      <td>10</td>\n      <td>1 849,62 €</td>\n      <td>20 %</td>\n      <td>18 496,20 €</td>\n    </tr>\n  </tbody>\n</table>\n\n---\n\n**Total HT** 18 496,20 €  \n**TVA 20 %** 3 699,24 €  \n**Total TVA** 3 699,24 €  \n**Total TTC** 22 195,44 €  \n\n---\n\n**Mode de paiement** : Carte bancaire  \n**IBAN** : FR1578820812191361939909169  \nEn cas de retard de paiement, une indemnité forfaitaire de 40 € pour frais de recouvrement sera exigée (art. L441-10 du Code de commerce).\n",
+              "refusal": null,
+              "annotations": null,
+              "audio": null,
+              "function_call": null,
+              "reasoning": null
+            },
+            "logprobs": null,
+            "finish_reason": "stop",
+            "stop_reason": null,
+            "token_ids": null,
+            "routed_experts": null,
+            "weight_versions": null
+          }
+        ],
+        "service_tier": null,
+        "system_fingerprint": "vllm-0.33.0-25ec7f27",
+        "usage": {
+          "prompt_tokens": 2157,
+          "total_tokens": 2662,
+          "completion_tokens": 505,
+          "prompt_tokens_details": null,
+          "completion_tokens_details": null
+        },
+        "prompt_logprobs": null,
+        "prompt_token_ids": null,
+        "prompt_text": null,
+        "kv_transfer_params": null,
+        "ec_transfer_params": null,
+        "metrics": null
+      }
+    }
+  ],
+  "markdown_sha256": "3e316d5414b96dd87f51f2259bfd67c802858557dcbc812928cb881407ec2a10"
+}

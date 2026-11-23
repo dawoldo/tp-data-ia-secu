@@ -1,0 +1,83 @@
+{
+  "format": 2,
+  "source": "facture_MS-2025-0003_scan.pdf",
+  "origin": {
+    "s3_key": "facture_MS-2025-0003_scan.pdf",
+    "etag": "\"efb7257e76a89ad6d35c2d91d6f2b353\"",
+    "last_modified": "2026-11-23T10:26:59+00:00",
+    "pulled_at": "2026-11-23T14:11:21+00:00"
+  },
+  "sha256": "edebb940677452799a065ec177a0bc984b53fca3b6dfb9d89fda74685cf96ed3",
+  "size": 236492,
+  "kind": "image",
+  "page_count": 1,
+  "repaired": false,
+  "settings": {
+    "ocr": {
+      "engine": "lightonocr",
+      "model": "lightonocr-3-1b-test",
+      "max_side": 1540,
+      "image_format": "png",
+      "max_tokens": 4096,
+      "temperature": 0.2,
+      "top_p": 0.9
+    }
+  },
+  "converted_at": "2026-11-23T14:15:19.429+00:00",
+  "pages": [
+    {
+      "page": 1,
+      "kind": "image",
+      "reason": "full-page image",
+      "visible_chars": 0,
+      "hidden_chars": 0,
+      "unreadable_ratio": 0.0,
+      "image_coverage": 1.0,
+      "method": "ocr",
+      "seconds": 6.65,
+      "image_sha256": "a9e5d993cd57a2c13df4de7bfafedd6a78f83919ec95585106232cabe39f1beb",
+      "ocr_response": {
+        "id": "chatcmpl-51acda81-a421-47c2-88d1-9ed3b1cf69fe",
+        "object": "chat.completion",
+        "created": 1795443314,
+        "model": "lightonocr-3-1b-test",
+        "choices": [
+          {
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "Maury S.A.R.L.  \nrue Carpentier  \n29617 Michel-sur-Guilbert  \nSIRET : 10433218438637  \nTVA intracom. : FR94104332184  \n\n# FACTURE\n\nNuméro de facture : MS-2025-0003  \nDate d'émission : 16/01/2025  \nDate d'échéance : 31/01/2025  \nCatégorie : Informatique  \nStatut : Payée  \n\n**Facturé à :**  \nClient : Torres  \navenue David Faure  \n41722 François  \nSIRET client : 08470076424998  \n\n<table>\n  <thead>\n    <tr>\n      <th>Désignation</th>\n      <th>Qté</th>\n      <th>Prix unitaire HT</th>\n      <th>TVA</th>\n      <th>Total HT</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td>Écran 27 pouces QHD</td>\n      <td>8</td>\n      <td>290,46 €</td>\n      <td>20 %</td>\n      <td>2 323,68 €</td>\n    </tr>\n    <tr>\n      <td>Station d'accueil USB-C</td>\n      <td>7</td>\n      <td>179,24 €</td>\n      <td>20 %</td>\n      <td>1 254,68 €</td>\n    </tr>\n  </tbody>\n</table>\n\n<table>\n  <tbody>\n    <tr>\n      <td>Total HT</td>\n      <td>3 578,36 €</td>\n    </tr>\n    <tr>\n      <td>TVA 20 %</td>\n      <td>715,67 €</td>\n    </tr>\n    <tr>\n      <td>Total TVA</td>\n      <td>715,67 €</td>\n    </tr>\n    <tr>\n      <td>Total TTC</td>\n      <td>4 294,03 €</td>\n    </tr>\n  </tbody>\n</table>\n\nMode de paiement : Chèque  \nIBAN : FR5002654235116155940781618  \nEn cas de retard de paiement, une indemnité forfaitaire de 40 € pour frais de recouvrement sera exigée (art. L441-10 du Code de commerce).\n",
+              "refusal": null,
+              "annotations": null,
+              "audio": null,
+              "function_call": null,
+              "reasoning": null
+            },
+            "logprobs": null,
+            "finish_reason": "stop",
+            "stop_reason": null,
+            "token_ids": null,
+            "routed_experts": null,
+            "weight_versions": null
+          }
+        ],
+        "service_tier": null,
+        "system_fingerprint": "vllm-0.33.0-25ec7f27",
+        "usage": {
+          "prompt_tokens": 2157,
+          "total_tokens": 2779,
+          "completion_tokens": 622,
+          "prompt_tokens_details": null,
+          "completion_tokens_details": null
+        },
+        "prompt_logprobs": null,
+        "prompt_token_ids": null,
+        "prompt_text": null,
+        "kv_transfer_params": null,
+        "ec_transfer_params": null,
+        "metrics": null
+      }
+    }
+  ],
+  "markdown_sha256": "51062acda982c38aee25354058093e48532cf7af4b451792019a90a6a26fd6d1"
+}

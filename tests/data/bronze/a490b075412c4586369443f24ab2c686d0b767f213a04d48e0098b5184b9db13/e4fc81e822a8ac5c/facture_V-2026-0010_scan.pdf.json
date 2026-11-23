@@ -1,0 +1,83 @@
+{
+  "format": 2,
+  "source": "facture_V-2026-0010_scan.pdf",
+  "origin": {
+    "s3_key": "facture_V-2026-0010_scan.pdf",
+    "etag": "\"81cd4b2514fad141d7025c55d58cc981\"",
+    "last_modified": "2026-11-23T10:27:07+00:00",
+    "pulled_at": "2026-11-23T14:11:24+00:00"
+  },
+  "sha256": "a490b075412c4586369443f24ab2c686d0b767f213a04d48e0098b5184b9db13",
+  "size": 313938,
+  "kind": "image",
+  "page_count": 1,
+  "repaired": false,
+  "settings": {
+    "ocr": {
+      "engine": "lightonocr",
+      "model": "lightonocr-3-1b-test",
+      "max_side": 1540,
+      "image_format": "png",
+      "max_tokens": 4096,
+      "temperature": 0.2,
+      "top_p": 0.9
+    }
+  },
+  "converted_at": "2026-11-23T14:17:39.243+00:00",
+  "pages": [
+    {
+      "page": 1,
+      "kind": "image",
+      "reason": "full-page image",
+      "visible_chars": 0,
+      "hidden_chars": 0,
+      "unreadable_ratio": 0.0,
+      "image_coverage": 1.0,
+      "method": "ocr",
+      "seconds": 8.05,
+      "image_sha256": "0db213ba081acec9c6b7f113576f4ca99aec4cd129b4d7091d64bd19b0e0d381",
+      "ocr_response": {
+        "id": "chatcmpl-efd7f73c-bcce-40a3-9ca3-dc09661bfb00",
+        "object": "chat.completion",
+        "created": 1795443453,
+        "model": "lightonocr-3-1b-test",
+        "choices": [
+          {
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "# FACTURE\n\n**Vasseur**  \n171, rue Techer  \n20911 GodardBourg  \nSIRET : 38849696066978  \nTVA intracom. : FR48388496960  \n\n**Numéro de facture** : V-2026-0010  \n**Date d'émission** : 17/01/2026  \n**Date d'échéance** : 03/03/2026  \n**Catégorie** : Fournitures  \n**Statut** : En retard  \n\n**Facturé à** :  \nClient : Jacob Aubert S.A.S.  \n51, chemin Simone Guillou  \n34940 Sainte Monique  \nSIRET client : 48467737249972  \n\n<table>\n  <thead>\n    <tr>\n      <th>Désignation</th>\n      <th>Qté</th>\n      <th>Prix unitaire HT</th>\n      <th>TVA</th>\n      <th>Total HT</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td>Cartouche toner noir</td>\n      <td>2</td>\n      <td>72,08 €</td>\n      <td>20 %</td>\n      <td>144,16 €</td>\n    </tr>\n    <tr>\n      <td>Lot de stylos bille bleus</td>\n      <td>9</td>\n      <td>7,07 €</td>\n      <td>20 %</td>\n      <td>63,63 €</td>\n    </tr>\n    <tr>\n      <td>Ramette papier A4 500 feuilles</td>\n      <td>5</td>\n      <td>4,76 €</td>\n      <td>20 %</td>\n      <td>23,80 €</td>\n    </tr>\n    <tr>\n      <td>Classeur à levier dos large</td>\n      <td>11</td>\n      <td>4,89 €</td>\n      <td>20 %</td>\n      <td>53,79 €</td>\n    </tr>\n  </tbody>\n</table>\n\n<table>\n  <tbody>\n    <tr>\n      <td>Total HT</td>\n      <td>285,38 €</td>\n    </tr>\n    <tr>\n      <td>TVA 20 %</td>\n      <td>57,08 €</td>\n    </tr>\n    <tr>\n      <td>Total TVA</td>\n      <td>57,08 €</td>\n    </tr>\n    <tr>\n      <td>Total TTC</td>\n      <td>342,46 €</td>\n    </tr>\n  </tbody>\n</table>\n\n**Mode de paiement** : Prélèvement SEPA  \n**IBAN** : FR3801845146270482814893252  \nEn cas de retard de paiement, une indemnité forfaitaire de 40 € pour frais de recouvrement sera exigée (art. L441-10 du Code de commerce).\n",
+              "refusal": null,
+              "annotations": null,
+              "audio": null,
+              "function_call": null,
+              "reasoning": null
+            },
+            "logprobs": null,
+            "finish_reason": "stop",
+            "stop_reason": null,
+            "token_ids": null,
+            "routed_experts": null,
+            "weight_versions": null
+          }
+        ],
+        "service_tier": null,
+        "system_fingerprint": "vllm-0.33.0-25ec7f27",
+        "usage": {
+          "prompt_tokens": 2157,
+          "total_tokens": 2928,
+          "completion_tokens": 771,
+          "prompt_tokens_details": null,
+          "completion_tokens_details": null
+        },
+        "prompt_logprobs": null,
+        "prompt_token_ids": null,
+        "prompt_text": null,
+        "kv_transfer_params": null,
+        "ec_transfer_params": null,
+        "metrics": null
+      }
+    }
+  ],
+  "markdown_sha256": "6d1644a7c5c6140a2794615e5fbf42b09ab572b7db41f4bb4117162005867eaf"
+}

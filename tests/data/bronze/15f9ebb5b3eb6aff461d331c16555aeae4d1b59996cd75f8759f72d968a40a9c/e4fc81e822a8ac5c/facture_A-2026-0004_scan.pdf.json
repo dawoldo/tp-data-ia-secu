@@ -1,0 +1,83 @@
+{
+  "format": 2,
+  "source": "facture_A-2026-0004_scan.pdf",
+  "origin": {
+    "s3_key": "facture_A-2026-0004_scan.pdf",
+    "etag": "\"cd99e3e8882184a3a3ee414945a7e9c9\"",
+    "last_modified": "2026-11-23T10:26:45+00:00",
+    "pulled_at": "2026-11-23T11:47:39+00:00"
+  },
+  "sha256": "15f9ebb5b3eb6aff461d331c16555aeae4d1b59996cd75f8759f72d968a40a9c",
+  "size": 241037,
+  "kind": "image",
+  "page_count": 1,
+  "repaired": false,
+  "settings": {
+    "ocr": {
+      "engine": "lightonocr",
+      "model": "lightonocr-3-1b-test",
+      "max_side": 1540,
+      "image_format": "png",
+      "max_tokens": 4096,
+      "temperature": 0.2,
+      "top_p": 0.9
+    }
+  },
+  "converted_at": "2026-11-23T14:06:58.030+00:00",
+  "pages": [
+    {
+      "page": 1,
+      "kind": "image",
+      "reason": "full-page image",
+      "visible_chars": 0,
+      "hidden_chars": 0,
+      "unreadable_ratio": 0.0,
+      "image_coverage": 1.0,
+      "method": "ocr",
+      "seconds": 6.14,
+      "image_sha256": "641b7e567a84b8ca541319398bbdfc67309cbab6ad1cb5265cf357e65d7c3cbe",
+      "ocr_response": {
+        "id": "chatcmpl-dfc85026-28b7-4dd8-b603-2a5399064452",
+        "object": "chat.completion",
+        "created": 1795442813,
+        "model": "lightonocr-3-1b-test",
+        "choices": [
+          {
+            "index": 0,
+            "message": {
+              "role": "assistant",
+              "content": "# FACTURE\n\n**Aubry**  \n96, avenue de Meyer  \n24403 Boyer  \nSIRET : 77360260298050  \nTVA intracom. : FR09773602602  \n\n---\n\n**Numéro de facture** : A-2026-0004  \n**Date d'émission** : 23/03/2026  \n**Date d'échéance** : 07/04/2026  \n**Catégorie** : Conseil  \n**Statut** : En retard  \n\n---\n\n**Facturé à** :  \nClient : Fleury  \n7, rue de Descamps  \n69573 Vincent-sur-Mer  \nSIRET client : 67468071585977  \n\n---\n\n<table>\n  <thead>\n    <tr>\n      <th>Désignation</th>\n      <th>Qté</th>\n      <th>Prix unitaire HT</th>\n      <th>TVA</th>\n      <th>Total HT</th>\n    </tr>\n  </thead>\n  <tbody>\n    <tr>\n      <td>Formation DuckDB et Parquet</td>\n      <td>5</td>\n      <td>1 271,02 €</td>\n      <td>20 %</td>\n      <td>6 355,10 €</td>\n    </tr>\n    <tr>\n      <td>Journée de conseil data engineering</td>\n      <td>7</td>\n      <td>650,93 €</td>\n      <td>20 %</td>\n      <td>4 556,51 €</td>\n    </tr>\n  </tbody>\n</table>\n\n---\n\n**Total HT** 10 911,61 €  \n**TVA 20 %** 2 182,32 €  \n**Total TVA** 2 182,32 €  \n**Total TTC** 13 093,93 €  \n\n---\n\n**Mode de paiement** : Prélèvement SEPA  \n**IBAN** : FR1578820812191361939909169  \nEn cas de retard de paiement, une indemnité forfaitaire de 40 € pour frais de recouvrement sera exigée (art. L441-10 du Code de commerce).\n",
+              "refusal": null,
+              "annotations": null,
+              "audio": null,
+              "function_call": null,
+              "reasoning": null
+            },
+            "logprobs": null,
+            "finish_reason": "stop",
+            "stop_reason": null,
+            "token_ids": null,
+            "routed_experts": null,
+            "weight_versions": null
+          }
+        ],
+        "service_tier": null,
+        "system_fingerprint": "vllm-0.33.0-25ec7f27",
+        "usage": {
+          "prompt_tokens": 2157,
+          "total_tokens": 2725,
+          "completion_tokens": 568,
+          "prompt_tokens_details": null,
+          "completion_tokens_details": null
+        },
+        "prompt_logprobs": null,
+        "prompt_token_ids": null,
+        "prompt_text": null,
+        "kv_transfer_params": null,
+        "ec_transfer_params": null,
+        "metrics": null
+      }
+    }
+  ],
+  "markdown_sha256": "da85226d9ddc5f3cfc837641cdfab4da6156b89a488eec117d5140ccc890497f"
+}

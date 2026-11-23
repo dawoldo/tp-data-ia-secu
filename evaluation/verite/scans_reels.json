@@ -1,0 +1,1055 @@
+{
+ "_note": "Transcription des 20 scans depuis les images, par un assistant IA, sans consulter la couche silver (sauf A-2025-0003, A-2025-0010 et GPE-2026-0016, dont l'OCR avait deja ete vu). Echantillon : 2 ou 3 scans par fournisseur, choisis par empreinte du nom de fichier. A relire par une personne.",
+ "factures": {
+  "facture_A-2025-0003_scan.pdf": {
+   "numero": "A-2025-0003",
+   "date_emission": "2025-04-29",
+   "date_echeance": "2025-06-13",
+   "categorie": "Conseil",
+   "statut": "En retard",
+   "mode_paiement": "Chèque",
+   "iban": "FR1578820812191361939909169",
+   "total_ht": "6306.05",
+   "total_tva": "1261.21",
+   "total_ttc": "7567.26",
+   "detail_tva": [
+    [
+     "20",
+     "1261.21"
+    ]
+   ],
+   "fournisseur": {
+    "nom": "Aubry",
+    "adresse": "96, avenue de Meyer",
+    "code_postal": "24403",
+    "ville": "Boyer",
+    "siret": "77360260298050",
+    "tva_intracom": "FR09773602602"
+   },
+   "client": {
+    "nom": "Dumas",
+    "adresse": "4, chemin Roger Muller",
+    "code_postal": "97345",
+    "ville": "Clerc",
+    "siret": "16073375486850"
+   },
+   "lignes": [
+    [
+     "Formation DuckDB et Parquet",
+     "5",
+     "1261.21",
+     "20",
+     "6306.05"
+    ]
+   ]
+  },
+  "facture_A-2025-0010_scan.pdf": {
+   "numero": "A-2025-0010",
+   "date_emission": "2025-06-01",
+   "date_echeance": "2025-06-16",
+   "categorie": "Conseil",
+   "statut": "En retard",
+   "mode_paiement": "Carte bancaire",
+   "iban": "FR1578820812191361939909169",
+   "total_ht": "18496.20",
+   "total_tva": "3699.24",
+   "total_ttc": "22195.44",
+   "detail_tva": [
+    [
+     "20",
+     "3699.24"
+    ]
+   ],
+   "fournisseur": {
+    "nom": "Aubry",
+    "adresse": "96, avenue de Meyer",
+    "code_postal": "24403",
+    "ville": "Boyer",
+    "siret": "77360260298050",
+    "tva_intracom": "FR09773602602"
+   },
+   "client": {
+    "nom": "Muller",
+    "adresse": "2, boulevard de Fabre",
+    "code_postal": "48529",
+    "ville": "Leblanc-les-Bains",
+    "siret": "44550229754599"
+   },
+   "lignes": [
+    [
+     "Atelier de cadrage projet",
+     "10",
+     "1849.62",
+     "20",
+     "18496.20"
+    ]
+   ]
+  },
+  "facture_BS-2026-0001_scan.pdf": {
+   "numero": "BS-2026-0001",
+   "date_emission": "2026-06-30",
+   "date_echeance": "2026-07-30",
+   "categorie": "Fournitures",
+   "statut": "Payée",
+   "mode_paiement": "Prélèvement SEPA",
+   "iban": "FR4545053315869232260256342",
+   "total_ht": "235.35",
+   "total_tva": "47.07",
+   "total_ttc": "282.42",
+   "detail_tva": [
+    [
+     "20",
+     "47.07"
+    ]
+   ],
+   "fournisseur": {
+    "nom": "Bernard SARL",
+    "adresse": "82, avenue de Guilbert",
+    "code_postal": "02214",
+    "ville": "Saint ÉmilieVille",
+    "siret": "48740164859826",
+    "tva_intracom": "FR20487401648"
+   },
+   "client": {
+    "nom": "Lombard",
+    "adresse": "86, rue William Bègue",
+    "code_postal": "88105",
+    "ville": "Sainte Matthieu-les-Bains",
+    "siret": "20037917087083"
+   },
+   "lignes": [
+    [
+     "Cartouche toner noir",
+     "3",
+     "67.55",
+     "20",
+     "202.65"
+    ],
+    [
+     "Classeur à levier dos large",
+     "10",
+     "3.27",
+     "20",
+     "32.70"
+    ]
+   ]
+  },
+  "facture_BS-2026-0007_scan.pdf": {
+   "numero": "BS-2026-0007",
+   "date_emission": "2026-11-18",
+   "date_echeance": "2027-01-17",
+   "categorie": "Fournitures",
+   "statut": "Payée",
+   "mode_paiement": "Virement bancaire",
+   "iban": "FR4545053315869232260256342",
+   "total_ht": "246.92",
+   "total_tva": "49.38",
+   "total_ttc": "296.30",
+   "detail_tva": [
+    [
+     "20",
+     "49.38"
+    ]
+   ],
+   "fournisseur": {
+    "nom": "Bernard SARL",
+    "adresse": "82, avenue de Guilbert",
+    "code_postal": "02214",
+    "ville": "Saint ÉmilieVille",
+    "siret": "48740164859826",
+    "tva_intracom": "FR20487401648"
+   },
+   "client": {
+    "nom": "Jacob Aubert S.A.S.",
+    "adresse": "51, chemin Simone Guillou",
+    "code_postal": "34940",
+    "ville": "Sainte Monique",
+    "siret": "48467737249972"
+   },
+   "lignes": [
+    [
+     "Cartouche toner noir",
+     "2",
+     "107.36",
+     "20",
+     "214.72"
+    ],
+    [
+     "Classeur à levier dos large",
+     "10",
+     "3.22",
+     "20",
+     "32.20"
+    ]
+   ]
+  },
+  "facture_C-2026-0004_scan.pdf": {
+   "numero": "C-2026-0004",
+   "date_emission": "2026-02-22",
+   "date_echeance": "2026-04-08",
+   "categorie": "Maintenance",
+   "statut": "Payée",
+   "mode_paiement": "Chèque",
+   "iban": "FR5476483503056413953767242",
+   "total_ht": "8178.77",
+   "total_tva": "1635.75",
+   "total_ttc": "9814.52",
+   "detail_tva": [
+    [
+     "20",
+     "1635.75"
+    ]
+   ],
+   "fournisseur": {
+    "nom": "Chevalier",
+    "adresse": "7, avenue Luce Marchal",
+    "code_postal": "20479",
+    "ville": "Lacroix",
+    "siret": "49593103241928",
+    "tva_intracom": "FR32495931032"
+   },
+   "client": {
+    "nom": "Grondin Pinto et Fils",
+    "adresse": "14, chemin Margaret Morvan",
+    "code_postal": "20175",
+    "ville": "Barre-la-Forêt",
+    "siret": "22196937164743"
+   },
+   "lignes": [
+    [
+     "Contrat de maintenance mensuel",
+     "4",
+     "791.38",
+     "20",
+     "3165.52"
+    ],
+    [
+     "Remplacement pièce détachée",
+     "7",
+     "193.35",
+     "20",
+     "1353.45"
+    ],
+    [
+     "Intervention technicien sur site",
+     "10",
+     "365.98",
+     "20",
+     "3659.80"
+    ]
+   ]
+  },
+  "facture_C-2026-0007_scan.pdf": {
+   "numero": "C-2026-0007",
+   "date_emission": "2026-05-19",
+   "date_echeance": "2026-06-03",
+   "categorie": "Maintenance",
+   "statut": "En attente",
+   "mode_paiement": "Prélèvement SEPA",
+   "iban": "FR5476483503056413953767242",
+   "total_ht": "2549.56",
+   "total_tva": "509.91",
+   "total_ttc": "3059.47",
+   "detail_tva": [
+    [
+     "20",
+     "509.91"
+    ]
+   ],
+   "fournisseur": {
+    "nom": "Chevalier",
+    "adresse": "7, avenue Luce Marchal",
+    "code_postal": "20479",
+    "ville": "Lacroix",
+    "siret": "49593103241928",
+    "tva_intracom": "FR32495931032"
+   },
+   "client": {
+    "nom": "Mace S.A.",
+    "adresse": "81, chemin Laurence Jacquot",
+    "code_postal": "50765",
+    "ville": "Sainte Dominiquenec",
+    "siret": "89517187457809"
+   },
+   "lignes": [
+    [
+     "Remplacement pièce détachée",
+     "3",
+     "176.95",
+     "20",
+     "530.85"
+    ],
+    [
+     "Intervention technicien sur site",
+     "5",
+     "142.15",
+     "20",
+     "710.75"
+    ],
+    [
+     "Contrat de maintenance mensuel",
+     "4",
+     "326.99",
+     "20",
+     "1307.96"
+    ]
+   ]
+  },
+  "facture_C-2026-0014_scan.pdf": {
+   "numero": "C-2026-0014",
+   "date_emission": "2026-03-30",
+   "date_echeance": "2026-05-29",
+   "categorie": "Maintenance",
+   "statut": "En attente",
+   "mode_paiement": "Virement bancaire",
+   "iban": "FR5476483503056413953767242",
+   "total_ht": "3495.42",
+   "total_tva": "699.08",
+   "total_ttc": "4194.50",
+   "detail_tva": [
+    [
+     "20",
+     "699.08"
+    ]
+   ],
+   "fournisseur": {
+    "nom": "Chevalier",
+    "adresse": "7, avenue Luce Marchal",
+    "code_postal": "20479",
+    "ville": "Lacroix",
+    "siret": "49593103241928",
+    "tva_intracom": "FR32495931032"
+   },
+   "client": {
+    "nom": "Diallo Barbe S.A.R.L.",
+    "adresse": "74, boulevard Laure Lopez",
+    "code_postal": "78857",
+    "ville": "Saint Lorraine-sur-Mer",
+    "siret": "29413186741232"
+   },
+   "lignes": [
+    [
+     "Remplacement pièce détachée",
+     "7",
+     "82.80",
+     "20",
+     "579.60"
+    ],
+    [
+     "Contrat de maintenance mensuel",
+     "9",
+     "323.98",
+     "20",
+     "2915.82"
+    ]
+   ]
+  },
+  "facture_GPE-2025-0003_scan.pdf": {
+   "numero": "GPE-2025-0003",
+   "date_emission": "2025-01-12",
+   "date_echeance": "2025-01-27",
+   "categorie": "Informatique",
+   "statut": "Payée",
+   "mode_paiement": "Prélèvement SEPA",
+   "iban": "FR4513338726247317810801326",
+   "total_ht": "11010.25",
+   "total_tva": "2202.05",
+   "total_ttc": "13212.30",
+   "detail_tva": [
+    [
+     "20",
+     "2202.05"
+    ]
+   ],
+   "fournisseur": {
+    "nom": "Gimenez Payet et Fils",
+    "adresse": "873, rue Étienne Pereira",
+    "code_postal": "84541",
+    "ville": "Briand",
+    "siret": "10518347967010",
+    "tva_intracom": "FR65105183479"
+   },
+   "client": {
+    "nom": "Torres",
+    "adresse": "avenue David Faure",
+    "code_postal": "41722",
+    "ville": "François",
+    "siret": "08470076424998"
+   },
+   "lignes": [
+    [
+     "Licence logiciel bureautique annuelle",
+     "3",
+     "110.76",
+     "20",
+     "332.28"
+    ],
+    [
+     "Disque SSD externe 2 To",
+     "12",
+     "169.07",
+     "20",
+     "2028.84"
+    ],
+    [
+     "Ordinateur portable Pro 14 pouces",
+     "5",
+     "1482.13",
+     "20",
+     "7410.65"
+    ],
+    [
+     "Écran 27 pouces QHD",
+     "3",
+     "295.46",
+     "20",
+     "886.38"
+    ],
+    [
+     "Station d'accueil USB-C",
+     "2",
+     "176.05",
+     "20",
+     "352.10"
+    ]
+   ]
+  },
+  "facture_GPE-2025-0007_scan.pdf": {
+   "numero": "GPE-2025-0007",
+   "date_emission": "2025-08-17",
+   "date_echeance": "2025-09-01",
+   "categorie": "Informatique",
+   "statut": "En retard",
+   "mode_paiement": "Chèque",
+   "iban": "FR4513338726247317810801326",
+   "total_ht": "1395.10",
+   "total_tva": "279.02",
+   "total_ttc": "1674.12",
+   "detail_tva": [
+    [
+     "20",
+     "279.02"
+    ]
+   ],
+   "fournisseur": {
+    "nom": "Gimenez Payet et Fils",
+    "adresse": "873, rue Étienne Pereira",
+    "code_postal": "84541",
+    "ville": "Briand",
+    "siret": "10518347967010",
+    "tva_intracom": "FR65105183479"
+   },
+   "client": {
+    "nom": "Baron",
+    "adresse": "589, rue Collet",
+    "code_postal": "29469",
+    "ville": "Hernandez",
+    "siret": "13518233508240"
+   },
+   "lignes": [
+    [
+     "Station d'accueil USB-C",
+     "5",
+     "175.44",
+     "20",
+     "877.20"
+    ],
+    [
+     "Licence logiciel bureautique annuelle",
+     "5",
+     "103.58",
+     "20",
+     "517.90"
+    ]
+   ]
+  },
+  "facture_GPE-2026-0016_scan.pdf": {
+   "numero": "GPE-2026-0016",
+   "date_emission": "2026-04-08",
+   "date_echeance": "2026-04-23",
+   "categorie": "Informatique",
+   "statut": "Payée",
+   "mode_paiement": "Chèque",
+   "iban": "FR4513338726247317810801326",
+   "total_ht": "421.85",
+   "total_tva": "84.37",
+   "total_ttc": "506.22",
+   "detail_tva": [
+    [
+     "20",
+     "84.37"
+    ]
+   ],
+   "fournisseur": {
+    "nom": "Gimenez Payet et Fils",
+    "adresse": "873, rue Étienne Pereira",
+    "code_postal": "84541",
+    "ville": "Briand",
+    "siret": "10518347967010",
+    "tva_intracom": "FR65105183479"
+   },
+   "client": {
+    "nom": "Foucher",
+    "adresse": "5, avenue Jérôme Bourgeois",
+    "code_postal": "17905",
+    "ville": "Poulain-la-Forêt",
+    "siret": "42104709324745"
+   },
+   "lignes": [
+    [
+     "Licence logiciel bureautique annuelle",
+     "5",
+     "84.37",
+     "20",
+     "421.85"
+    ]
+   ]
+  },
+  "facture_LG-2025-0005_scan.pdf": {
+   "numero": "LG-2025-0005",
+   "date_emission": "2025-09-05",
+   "date_echeance": "2025-11-04",
+   "categorie": "Informatique",
+   "statut": "Payée",
+   "mode_paiement": "Carte bancaire",
+   "iban": "FR2383465787133150983930103",
+   "total_ht": "5819.19",
+   "total_tva": "1163.84",
+   "total_ttc": "6983.03",
+   "detail_tva": [
+    [
+     "20",
+     "1163.84"
+    ]
+   ],
+   "fournisseur": {
+    "nom": "Le Gall",
+    "adresse": "4, rue de Clément",
+    "code_postal": "93597",
+    "ville": "Saint Gilbertdan",
+    "siret": "88095701482489",
+    "tva_intracom": "FR63880957014"
+   },
+   "client": {
+    "nom": "Lombard",
+    "adresse": "86, rue William Bègue",
+    "code_postal": "88105",
+    "ville": "Sainte Matthieu-les-Bains",
+    "siret": "20037917087083"
+   },
+   "lignes": [
+    [
+     "Disque SSD externe 2 To",
+     "11",
+     "155.95",
+     "20",
+     "1715.45"
+    ],
+    [
+     "Écran 27 pouces QHD",
+     "8",
+     "349.66",
+     "20",
+     "2797.28"
+    ],
+    [
+     "Licence logiciel bureautique annuelle",
+     "2",
+     "99.60",
+     "20",
+     "199.20"
+    ],
+    [
+     "Station d'accueil USB-C",
+     "7",
+     "158.18",
+     "20",
+     "1107.26"
+    ]
+   ]
+  },
+  "facture_LG-2026-0004_scan.pdf": {
+   "numero": "LG-2026-0004",
+   "date_emission": "2026-11-14",
+   "date_echeance": "2026-11-29",
+   "categorie": "Informatique",
+   "statut": "Payée",
+   "mode_paiement": "Prélèvement SEPA",
+   "iban": "FR2383465787133150983930103",
+   "total_ht": "2460.26",
+   "total_tva": "492.05",
+   "total_ttc": "2952.31",
+   "detail_tva": [
+    [
+     "20",
+     "492.05"
+    ]
+   ],
+   "fournisseur": {
+    "nom": "Le Gall",
+    "adresse": "4, rue de Clément",
+    "code_postal": "93597",
+    "ville": "Saint Gilbertdan",
+    "siret": "88095701482489",
+    "tva_intracom": "FR63880957014"
+   },
+   "client": {
+    "nom": "Baron",
+    "adresse": "589, rue Collet",
+    "code_postal": "29469",
+    "ville": "Hernandez",
+    "siret": "13518233508240"
+   },
+   "lignes": [
+    [
+     "Disque SSD externe 2 To",
+     "12",
+     "111.36",
+     "20",
+     "1336.32"
+    ],
+    [
+     "Station d'accueil USB-C",
+     "4",
+     "175.46",
+     "20",
+     "701.84"
+    ],
+    [
+     "Licence logiciel bureautique annuelle",
+     "3",
+     "140.70",
+     "20",
+     "422.10"
+    ]
+   ]
+  },
+  "facture_MS-2025-0009_scan.pdf": {
+   "numero": "MS-2025-0009",
+   "date_emission": "2025-07-24",
+   "date_echeance": "2025-08-08",
+   "categorie": "Informatique",
+   "statut": "Payée",
+   "mode_paiement": "Carte bancaire",
+   "iban": "FR5002654235116155940781618",
+   "total_ht": "13926.34",
+   "total_tva": "2785.27",
+   "total_ttc": "16711.61",
+   "detail_tva": [
+    [
+     "20",
+     "2785.27"
+    ]
+   ],
+   "fournisseur": {
+    "nom": "Maury S.A.R.L.",
+    "adresse": "rue Carpentier",
+    "code_postal": "29617",
+    "ville": "Michel-sur-Guilbert",
+    "siret": "10433218438637",
+    "tva_intracom": "FR94104332184"
+   },
+   "client": {
+    "nom": "Baron",
+    "adresse": "589, rue Collet",
+    "code_postal": "29469",
+    "ville": "Hernandez",
+    "siret": "13518233508240"
+   },
+   "lignes": [
+    [
+     "Écran 27 pouces QHD",
+     "10",
+     "379.07",
+     "20",
+     "3790.70"
+    ],
+    [
+     "Disque SSD externe 2 To",
+     "8",
+     "154.96",
+     "20",
+     "1239.68"
+    ],
+    [
+     "Ordinateur portable Pro 14 pouces",
+     "6",
+     "999.67",
+     "20",
+     "5998.02"
+    ],
+    [
+     "Station d'accueil USB-C",
+     "10",
+     "185.37",
+     "20",
+     "1853.70"
+    ],
+    [
+     "Licence logiciel bureautique annuelle",
+     "12",
+     "87.02",
+     "20",
+     "1044.24"
+    ]
+   ]
+  },
+  "facture_MS-2025-0017_scan.pdf": {
+   "numero": "MS-2025-0017",
+   "date_emission": "2025-01-16",
+   "date_echeance": "2025-03-02",
+   "categorie": "Informatique",
+   "statut": "En attente",
+   "mode_paiement": "Virement bancaire",
+   "iban": "FR5002654235116155940781618",
+   "total_ht": "200.81",
+   "total_tva": "40.16",
+   "total_ttc": "240.97",
+   "detail_tva": [
+    [
+     "20",
+     "40.16"
+    ]
+   ],
+   "fournisseur": {
+    "nom": "Maury S.A.R.L.",
+    "adresse": "rue Carpentier",
+    "code_postal": "29617",
+    "ville": "Michel-sur-Guilbert",
+    "siret": "10433218438637",
+    "tva_intracom": "FR94104332184"
+   },
+   "client": {
+    "nom": "Vidal",
+    "adresse": "avenue Victor Lecomte",
+    "code_postal": "58434",
+    "ville": "Samson",
+    "siret": "06990162764641"
+   },
+   "lignes": [
+    [
+     "Disque SSD externe 2 To",
+     "1",
+     "112.94",
+     "20",
+     "112.94"
+    ],
+    [
+     "Licence logiciel bureautique annuelle",
+     "1",
+     "87.87",
+     "20",
+     "87.87"
+    ]
+   ]
+  },
+  "facture_MS-2026-0005_scan.pdf": {
+   "numero": "MS-2026-0005",
+   "date_emission": "2026-05-04",
+   "date_echeance": "2026-06-03",
+   "categorie": "Informatique",
+   "statut": "Payée",
+   "mode_paiement": "Virement bancaire",
+   "iban": "FR5002654235116155940781618",
+   "total_ht": "334.22",
+   "total_tva": "66.84",
+   "total_ttc": "401.06",
+   "detail_tva": [
+    [
+     "20",
+     "66.84"
+    ]
+   ],
+   "fournisseur": {
+    "nom": "Maury S.A.R.L.",
+    "adresse": "rue Carpentier",
+    "code_postal": "29617",
+    "ville": "Michel-sur-Guilbert",
+    "siret": "10433218438637",
+    "tva_intracom": "FR94104332184"
+   },
+   "client": {
+    "nom": "Pereira",
+    "adresse": "92, boulevard Guilbert",
+    "code_postal": "71437",
+    "ville": "Sainte Adriennenec",
+    "siret": "45271111204945"
+   },
+   "lignes": [
+    [
+     "Disque SSD externe 2 To",
+     "2",
+     "167.11",
+     "20",
+     "334.22"
+    ]
+   ]
+  },
+  "facture_P-2025-0002_scan.pdf": {
+   "numero": "P-2025-0002",
+   "date_emission": "2025-06-28",
+   "date_echeance": "2025-08-12",
+   "categorie": "Informatique",
+   "statut": "En retard",
+   "mode_paiement": "Chèque",
+   "iban": "FR2142784980841241182449353",
+   "total_ht": "15897.98",
+   "total_tva": "3179.60",
+   "total_ttc": "19077.58",
+   "detail_tva": [
+    [
+     "20",
+     "3179.60"
+    ]
+   ],
+   "fournisseur": {
+    "nom": "Payet",
+    "adresse": "67, rue Albert",
+    "code_postal": "79676",
+    "ville": "Saint Élise-sur-Mer",
+    "siret": "98543534684251",
+    "tva_intracom": "FR35985435346"
+   },
+   "client": {
+    "nom": "Mace S.A.",
+    "adresse": "81, chemin Laurence Jacquot",
+    "code_postal": "50765",
+    "ville": "Sainte Dominiquenec",
+    "siret": "89517187457809"
+   },
+   "lignes": [
+    [
+     "Disque SSD externe 2 To",
+     "4",
+     "133.39",
+     "20",
+     "533.56"
+    ],
+    [
+     "Ordinateur portable Pro 14 pouces",
+     "10",
+     "1263.00",
+     "20",
+     "12630.00"
+    ],
+    [
+     "Écran 27 pouces QHD",
+     "6",
+     "287.35",
+     "20",
+     "1724.10"
+    ],
+    [
+     "Licence logiciel bureautique annuelle",
+     "8",
+     "126.29",
+     "20",
+     "1010.32"
+    ]
+   ]
+  },
+  "facture_P-2025-0008_scan.pdf": {
+   "numero": "P-2025-0008",
+   "date_emission": "2025-11-17",
+   "date_echeance": "2026-01-16",
+   "categorie": "Informatique",
+   "statut": "Payée",
+   "mode_paiement": "Carte bancaire",
+   "iban": "FR2142784980841241182449353",
+   "total_ht": "3702.19",
+   "total_tva": "740.44",
+   "total_ttc": "4442.63",
+   "detail_tva": [
+    [
+     "20",
+     "740.44"
+    ]
+   ],
+   "fournisseur": {
+    "nom": "Payet",
+    "adresse": "67, rue Albert",
+    "code_postal": "79676",
+    "ville": "Saint Élise-sur-Mer",
+    "siret": "98543534684251",
+    "tva_intracom": "FR35985435346"
+   },
+   "client": {
+    "nom": "Fernandes Grondin S.A.R.L.",
+    "adresse": "23, avenue Vincent Allard",
+    "code_postal": "59525",
+    "ville": "Saint Victoire",
+    "siret": "14345581466909"
+   },
+   "lignes": [
+    [
+     "Licence logiciel bureautique annuelle",
+     "11",
+     "143.61",
+     "20",
+     "1579.71"
+    ],
+    [
+     "Disque SSD externe 2 To",
+     "2",
+     "106.30",
+     "20",
+     "212.60"
+    ],
+    [
+     "Ordinateur portable Pro 14 pouces",
+     "2",
+     "954.94",
+     "20",
+     "1909.88"
+    ]
+   ]
+  },
+  "facture_V-2025-0003_scan.pdf": {
+   "numero": "V-2025-0003",
+   "date_emission": "2025-10-18",
+   "date_echeance": "2025-12-02",
+   "categorie": "Fournitures",
+   "statut": "Payée",
+   "mode_paiement": "Prélèvement SEPA",
+   "iban": "FR3801845146270482814893252",
+   "total_ht": "53.46",
+   "total_tva": "10.69",
+   "total_ttc": "64.15",
+   "detail_tva": [
+    [
+     "20",
+     "10.69"
+    ]
+   ],
+   "fournisseur": {
+    "nom": "Vasseur",
+    "adresse": "171, rue Techer",
+    "code_postal": "20911",
+    "ville": "GodardBourg",
+    "siret": "38849696066978",
+    "tva_intracom": "FR48388496960"
+   },
+   "client": {
+    "nom": "Lombard",
+    "adresse": "86, rue William Bègue",
+    "code_postal": "88105",
+    "ville": "Sainte Matthieu-les-Bains",
+    "siret": "20037917087083"
+   },
+   "lignes": [
+    [
+     "Lot de stylos bille bleus",
+     "11",
+     "4.86",
+     "20",
+     "53.46"
+    ]
+   ]
+  },
+  "facture_V-2025-0009_scan.pdf": {
+   "numero": "V-2025-0009",
+   "date_emission": "2025-03-03",
+   "date_echeance": "2025-04-17",
+   "categorie": "Fournitures",
+   "statut": "En attente",
+   "mode_paiement": "Virement bancaire",
+   "iban": "FR3801845146270482814893252",
+   "total_ht": "660.90",
+   "total_tva": "132.18",
+   "total_ttc": "793.08",
+   "detail_tva": [
+    [
+     "20",
+     "132.18"
+    ]
+   ],
+   "fournisseur": {
+    "nom": "Vasseur",
+    "adresse": "171, rue Techer",
+    "code_postal": "20911",
+    "ville": "GodardBourg",
+    "siret": "38849696066978",
+    "tva_intracom": "FR48388496960"
+   },
+   "client": {
+    "nom": "Torres",
+    "adresse": "avenue David Faure",
+    "code_postal": "41722",
+    "ville": "François",
+    "siret": "08470076424998"
+   },
+   "lignes": [
+    [
+     "Cartouche toner noir",
+     "6",
+     "110.15",
+     "20",
+     "660.90"
+    ]
+   ]
+  },
+  "facture_V-2026-0010_scan.pdf": {
+   "numero": "V-2026-0010",
+   "date_emission": "2026-01-17",
+   "date_echeance": "2026-03-03",
+   "categorie": "Fournitures",
+   "statut": "En retard",
+   "mode_paiement": "Prélèvement SEPA",
+   "iban": "FR3801845146270482814893252",
+   "total_ht": "285.38",
+   "total_tva": "57.08",
+   "total_ttc": "342.46",
+   "detail_tva": [
+    [
+     "20",
+     "57.08"
+    ]
+   ],
+   "fournisseur": {
+    "nom": "Vasseur",
+    "adresse": "171, rue Techer",
+    "code_postal": "20911",
+    "ville": "GodardBourg",
+    "siret": "38849696066978",
+    "tva_intracom": "FR48388496960"
+   },
+   "client": {
+    "nom": "Jacob Aubert S.A.S.",
+    "adresse": "51, chemin Simone Guillou",
+    "code_postal": "34940",
+    "ville": "Sainte Monique",
+    "siret": "48467737249972"
+   },
+   "lignes": [
+    [
+     "Cartouche toner noir",
+     "2",
+     "72.08",
+     "20",
+     "144.16"
+    ],
+    [
+     "Lot de stylos bille bleus",
+     "9",
+     "7.07",
+     "20",
+     "63.63"
+    ],
+    [
+     "Ramette papier A4 500 feuilles",
+     "5",
+     "4.76",
+     "20",
+     "23.80"
+    ],
+    [
+     "Classeur à levier dos large",
+     "11",
+     "4.89",
+     "20",
+     "53.79"
+    ]
+   ]
+  }
+ }
+}

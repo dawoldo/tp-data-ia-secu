@@ -13,13 +13,11 @@ from pathlib import Path
 
 import duckdb
 
-from .bronze import read_documents
-from .build import Silver, analyse, summary, write
-from .parser import parse_invoice
+from paths import BRONZE, SILVER
 
-ROOT = Path(__file__).resolve().parent.parent
-BRONZE = ROOT / "factures" / "bronze"
-SILVER = ROOT / "factures" / "silver"
+from .parsing.parser import parse_invoice
+from .reader import read_documents
+from .tables import Silver, analyse, summary, write
 
 
 def run_parse(args: argparse.Namespace) -> int:

@@ -1,9 +1,7 @@
 .env
 .venv/
 __pycache__/
-factures/landing/
-factures/bronze/
-factures/silver/
-factures/evaluation/
-factures/warehouse/
 .pytest_cache/
+.ruff_cache/
+data/
+!tests/data/

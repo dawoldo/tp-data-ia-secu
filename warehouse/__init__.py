@@ -1,1 +1,1 @@
-"""From the bronze and silver layers to the data warehouse."""
+"""Warehouse: SQL access to the bronze and silver tables."""

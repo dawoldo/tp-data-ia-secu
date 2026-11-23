@@ -17,10 +17,10 @@ from typing import Any
 
 import duckdb
 
-from .bronze import Unusable, read_documents
 from .models import Partie
-from .parser import parse_invoice
-from .quality import REJET, Document, check_all
+from .parsing.parser import parse_invoice
+from .quality.checks import REJET, Document, check_all
+from .reader import Unusable, read_documents
 
 TABLES = {
     "factures": """

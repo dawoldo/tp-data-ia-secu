@@ -12,7 +12,8 @@ from pathlib import Path
 import duckdb
 import pytest
 
-from warehouse import export_parquet as E
+from bronze.storage import tables as E
+from silver.tables import analyse, write
 
 REAL = BRONZE
 
@@ -25,7 +26,8 @@ def bz(tmp_path):
 
 
 def ex(src, t):
-    return E.export(src, t / "s", t / "w")
+    rows, unusable = E.write_tables(src, t / "w")
+    return rows | write(analyse(src), t / "s"), unusable
 
 
 def q(t, sql):
@@ -34,12 +36,12 @@ def q(t, sql):
 
 def test_text_matches_bronze(tmp_path):
     n, u = ex(REAL, tmp_path)
-    assert n["bronze_pages"] == COUNT and n["factures"] == COUNT and not u
+    assert n["pages"] == COUNT and n["factures"] == COUNT and not u
     recs = {
         json.loads(Path(p).read_text())["sha256"]: Path(p)
         for p in glob.glob(str(REAL / "*/*/*.json"))
     }
-    for d, m in q(tmp_path, "select document_id,markdown from '@w/bronze_pages.parquet'"):
+    for d, m in q(tmp_path, "select document_id,markdown from '@w/pages.parquet'"):
         assert recs[d].with_suffix(".md").read_text() == f"<!-- page: 1 -->\n\n{m}\n"
 
 
@@ -47,13 +49,13 @@ def test_silver_joins_bronze(tmp_path):
     ex(REAL, tmp_path)
     assert q(
         tmp_path,
-        "select count(*) from '@s/factures.parquet' f join '@w/bronze_extractions.parquet' b on f.facture_id=b.document_id and f.bronze_version=b.version where f.s3_key=b.s3_key",
+        "select count(*) from '@s/factures.parquet' f join '@w/extractions.parquet' b on f.facture_id=b.document_id and f.bronze_version=b.version where f.s3_key=b.s3_key",
     ) == [(COUNT,)]
 
 
 def test_types(tmp_path):
     ex(REAL, tmp_path)
-    d = {r[0]: r[1] for r in q(tmp_path, "describe select * from '@w/bronze_extractions.parquet'")}
+    d = {r[0]: r[1] for r in q(tmp_path, "describe select * from '@w/extractions.parquet'")}
     assert (
         d["converted_at"] == "TIMESTAMP WITH TIME ZONE"
         and d["ocr_max_side"] == "INTEGER"
@@ -74,7 +76,7 @@ def test_deterministic(tmp_path):
 def test_odd_text(bz, tmp_path, v):
     bz.add(f=sub("Formation DuckDB et Parquet", v))
     ex(bz.root, tmp_path)
-    assert v in q(tmp_path, "select markdown from '@w/bronze_pages.parquet'")[0][0]
+    assert v in q(tmp_path, "select markdown from '@w/pages.parquet'")[0][0]
 
 
 def test_rejects_and_damage(bz, tmp_path):
@@ -84,20 +86,26 @@ def test_rejects_and_damage(bz, tmp_path):
     p = next((bz.root / x / "v").glob("*.md"))
     p.write_text(p.read_text() + "!")
     n, u = ex(bz.root, tmp_path)
-    assert n["factures"] == 1 and n["rejets"] == 2 and n["bronze_extractions"] == 2 and len(u) == 1
+    assert n["factures"] == 1 and n["rejets"] == 2 and n["extractions"] == 2 and len(u) == 1
 
 
 def test_all_versions(bz, tmp_path):
     x = bz.add()
     shutil.copytree(bz.root / x / "v", bz.root / x / "v2")
     n, _ = ex(bz.root, tmp_path)
-    assert n["bronze_extractions"] == 2 and n["factures"] == 1
+    assert n["extractions"] == 2 and n["factures"] == 1
 
 
 def test_failure_keeps_previous(tmp_path, monkeypatch):
     ex(REAL, tmp_path)
     b = {p: p.read_bytes() for p in tmp_path.rglob("*.parquet")}
-    monkeypatch.setattr(E, "write", lambda *a: (_ for _ in ()).throw(RuntimeError("x")))
+    real = E._write_files
+
+    def fail(*a):
+        real(*a)
+        raise RuntimeError("x")
+
+    monkeypatch.setattr(E, "_write_files", fail)
     with pytest.raises(RuntimeError):
         ex(REAL, tmp_path)
     assert {p: p.read_bytes() for p in tmp_path.rglob("*") if p.is_file()} == b
@@ -109,11 +117,11 @@ def test_multi_page():
 
 def test_cli(tmp_path):
     run = lambda *a: subprocess.run(
-        [sys.executable, "-B", "-m", "warehouse.export_parquet", *map(str, a)],
+        [sys.executable, "-B", "-m", "bronze", "tables", *map(str, a)],
         cwd=R,
         capture_output=True,
         text=True,
     )
-    r = run(BRONZE, "--out", tmp_path / "w", "--silver", tmp_path / "s")
-    assert r.returncode == 0 and len(list(tmp_path.rglob("*.parquet"))) == 7
+    r = run(BRONZE, "--out", tmp_path / "w")
+    assert r.returncode == 0 and len(list(tmp_path.rglob("*.parquet"))) == 2
     assert run(tmp_path / "no").returncode == 2

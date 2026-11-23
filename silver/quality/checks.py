@@ -17,7 +17,7 @@ from datetime import date
 from decimal import ROUND_HALF_UP, Decimal
 from typing import Any
 
-from .models import ERROR, Facture, ParseResult, Partie
+from ..models import ERROR, Facture, ParseResult, Partie
 
 REJET = "rejet"
 SIGNALEMENT = "signalement"

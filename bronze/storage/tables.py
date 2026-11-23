@@ -1,43 +1,24 @@
-"""Aggregate every extraction into Parquet tables, ready for the warehouse.
+"""Bronze as Parquet tables: every extraction ever made, all versions included.
 
-    python -m warehouse.export_parquet
-
-Refreshes the silver tables where they already are (factures/silver) and adds the
-bronze tables (factures/warehouse), so that each table exists once.
-
-The tables are derived data: they are rebuilt from bronze every time. The bronze
-ones are read back and compared before they replace the previous ones.
-Exit code: 0 = done, 1 = done, but some bronze records are unusable, 2 = failed.
+Derived data, rebuilt from the store every time; read back and compared before it
+replaces the previous tables.
 """
 
 from __future__ import annotations
 
-import argparse
 import hashlib
 import json
-import logging
 import os
 import re
 import shutil
-import sys
 import uuid
 from pathlib import Path
 from typing import Any
 
 import duckdb
 
-from silver.build import analyse, write
-
-ROOT = Path(__file__).resolve().parent.parent
-BRONZE = ROOT / "factures" / "bronze"
-SILVER = ROOT / "factures" / "silver"
-OUT = ROOT / "factures" / "warehouse"
-
-log = logging.getLogger("export")
-
-# Every extraction ever made, all versions included; silver uses the newest only.
 TABLES = {
-    "bronze_extractions": """
+    "extractions": """
         document_id VARCHAR NOT NULL, version VARCHAR NOT NULL, source VARCHAR NOT NULL,
         s3_key VARCHAR, etag VARCHAR, s3_last_modified TIMESTAMPTZ, pulled_at TIMESTAMPTZ,
         converted_at TIMESTAMPTZ NOT NULL, type_document VARCHAR NOT NULL,
@@ -45,7 +26,7 @@ TABLES = {
         ocr_moteur VARCHAR, ocr_modele VARCHAR, ocr_max_side INTEGER,
         ocr_format_image VARCHAR, texte_moteur VARCHAR, texte_version VARCHAR,
         markdown_sha256 VARCHAR NOT NULL, PRIMARY KEY (document_id, version)""",
-    "bronze_pages": """
+    "pages": """
         document_id VARCHAR NOT NULL, version VARCHAR NOT NULL, page INTEGER NOT NULL,
         type_page VARCHAR NOT NULL, motif VARCHAR NOT NULL, methode VARCHAR NOT NULL,
         ocr_secondes DECIMAL(10,2), ocr_tokens INTEGER, markdown VARCHAR NOT NULL,
@@ -87,8 +68,8 @@ def bronze_rows(store: Path) -> tuple[dict[str, list[tuple]], list[str]]:
         except (OSError, ValueError, KeyError, TypeError, AttributeError) as exc:
             unusable.append(f"{path}: {exc!r}")
             continue
-        rows["bronze_extractions"].append(extraction)
-        rows["bronze_pages"] += pages
+        rows["extractions"].append(extraction)
+        rows["pages"] += pages
     return rows, unusable
 
 
@@ -118,7 +99,7 @@ def _write_files(rows: dict[str, list[tuple]], folder: Path) -> None:
                 raise RuntimeError(f"{name}.parquet does not read back identically")
 
 
-def export(store: Path, silver: Path, out: Path) -> tuple[dict[str, int], list[str]]:
+def write_tables(store: Path, out: Path) -> tuple[dict[str, int], list[str]]:
     """Write every table; return the rows per table and the unusable records."""
     rows, unusable = bronze_rows(store)
     out.mkdir(parents=True, exist_ok=True)
@@ -126,37 +107,8 @@ def export(store: Path, silver: Path, out: Path) -> tuple[dict[str, int], list[s
     tmp.mkdir()
     try:
         _write_files(rows, tmp)
-        silver_counts = write(analyse(store), silver)
         for path in sorted(tmp.iterdir()):
             os.replace(path, out / path.name)
     finally:
         shutil.rmtree(tmp, ignore_errors=True)
-    return {name: len(r) for name, r in rows.items()} | silver_counts, unusable
-
-
-def main(argv: list[str] | None = None) -> int:
-    parser = argparse.ArgumentParser(
-        prog="warehouse.export_parquet",
-        description="Aggregate every extraction into Parquet tables.")
-    parser.add_argument("source", type=Path, nargs="?", default=BRONZE, help="bronze store")
-    parser.add_argument("--out", type=Path, default=OUT, help="where to write the bronze tables")
-    parser.add_argument("--silver", type=Path, default=SILVER,
-                        help="where the silver tables are refreshed")
-    args = parser.parse_args(argv)
-    logging.basicConfig(level=logging.INFO, stream=sys.stderr, format="%(levelname)s %(message)s")
-    if not args.source.is_dir():
-        log.error("no bronze store in %s", args.source)
-        return 2
-    try:
-        counts, unusable = export(args.source, args.silver, args.out)
-    except (OSError, ValueError, RuntimeError, duckdb.Error) as exc:
-        log.error("%s", exc)
-        return 2
-    for message in unusable:
-        log.error("unusable bronze record: %s", message)
-    print(json.dumps({"rows": counts, "unusable": len(unusable)}))
-    return int(bool(unusable))
-
-
-if __name__ == "__main__":
-    sys.exit(main())
+    return {name: len(r) for name, r in rows.items()}, unusable

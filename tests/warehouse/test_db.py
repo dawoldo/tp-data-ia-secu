@@ -5,7 +5,8 @@ import sys
 
 from common import BRONZE, COUNT, ROOT
 
-from warehouse.export_parquet import export
+from bronze.storage.tables import write_tables
+from silver.tables import analyse, write
 
 R = str(ROOT)
 import duckdb
@@ -18,7 +19,8 @@ from warehouse import db as W
 def data(tmp_path):
     d = tmp_path / "it's data"
     d.mkdir()
-    export(BRONZE, d / "silver", d / "warehouse")
+    write_tables(BRONZE, d / "bronze" / "tables")
+    write(analyse(BRONZE), d / "silver")
     return d
 
 
@@ -106,9 +108,9 @@ def test_moved_data_dir(data, tmp_path):
     n = tmp_path / "elsewhere"
     shutil.move(data, n)
     r = subprocess.run(
-        [sys.executable, "-m", "warehouse.db", "query", "select count(*) c from bronze.pages"],
+        [sys.executable, "-m", "warehouse", "query", "select count(*) c from bronze.pages"],
         cwd=R,
-        env={**os.environ, "FACTURES_DIR": str(n)},
+        env={**os.environ, "DATA_DIR": str(n)},
         capture_output=True,
         text=True,
     )
@@ -117,7 +119,7 @@ def test_moved_data_dir(data, tmp_path):
 
 def test_missing_file(data):
     (data / "silver/rejets.parquet").unlink()
-    with pytest.raises(FileNotFoundError, match="export_parquet"):
+    with pytest.raises(FileNotFoundError, match="warehouse refresh"):
         W.connect(data)
 
 
@@ -146,9 +148,39 @@ def test_descriptions(data):
 
 def test_bad_sql(data):
     r = subprocess.run(
-        [sys.executable, "-m", "warehouse.db", "query", "selec"],
+        [sys.executable, "-m", "warehouse", "query", "selec"],
         cwd=R,
-        env={**os.environ, "FACTURES_DIR": str(data)},
+        env={**os.environ, "DATA_DIR": str(data)},
+        capture_output=True,
+        text=True,
+    )
+    assert r.returncode == 2 and "Traceback" not in r.stderr
+
+
+def test_refresh_then_query(tmp_path):
+    shutil.copytree(BRONZE, tmp_path / "bronze" / "documents")
+    env = {**os.environ, "DATA_DIR": str(tmp_path)}
+
+    def run(*args):
+        return subprocess.run(
+            [sys.executable, "-m", "warehouse", *args],
+            cwd=R,
+            env=env,
+            capture_output=True,
+            text=True,
+        )
+
+    assert run("query", "select 1").returncode == 2  # nothing built yet
+    assert run("refresh").returncode == 0
+    assert run("build").returncode == 0
+    assert str(COUNT) in run("query", "select count(*) from silver.factures").stdout
+
+
+def test_refresh_without_bronze(tmp_path):
+    r = subprocess.run(
+        [sys.executable, "-m", "warehouse", "refresh"],
+        cwd=R,
+        env={**os.environ, "DATA_DIR": str(tmp_path)},
         capture_output=True,
         text=True,
     )

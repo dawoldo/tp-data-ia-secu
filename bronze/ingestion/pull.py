@@ -1,14 +1,13 @@
-#!/usr/bin/env python3
 """Download new invoice PDFs from an S3 bucket into a local landing zone.
 
 Re-running only downloads what is new or changed. Every file ever pulled is
 recorded in <dest>/manifest.json with its S3 key, ETag and SHA-256.
 
-    python factures/pull-factures.py                # pull everything new
-    python factures/pull-factures.py --limit 5      # start small
-    python factures/pull-factures.py --dry-run      # only show what would be pulled
+    python -m bronze pull                # pull everything new
+    python -m bronze pull --limit 5      # start small
+    python -m bronze pull --dry-run      # only show what would be pulled
 
-Settings come from the .env next to this script (see MANUAL.md), then from
+Settings come from .env (see MANUAL.md), then from
 environment variables for whatever .env leaves out (containers, CI). The file
 wins so that an unrelated AWS login in the shell is never used by accident.
 
@@ -23,7 +22,6 @@ import hashlib
 import json
 import logging
 import os
-import sys
 from dataclasses import dataclass
 from datetime import datetime, timezone
 from pathlib import Path, PurePosixPath
@@ -33,14 +31,14 @@ from botocore.config import Config
 from botocore.exceptions import BotoCoreError, ClientError
 from dotenv import dotenv_values
 
-HERE = Path(__file__).resolve().parent
+from . import MANIFEST_NAME
+
 DEFAULT_ENDPOINT = "https://dams-5.s3-gateway.console.hyperfluid.cloud"
 DEFAULT_BUCKET = "factures"
 DEFAULT_REGION = "us-east-1"  # only used to sign requests
-MANIFEST_NAME = "manifest.json"
 CHUNK_SIZE = 1024 * 1024
 
-log = logging.getLogger("pull-factures")
+log = logging.getLogger(__name__)
 
 
 class ConfigError(Exception):
@@ -265,32 +263,7 @@ def pull(
     return summary
 
 
-def positive_int(value: str) -> int:
-    number = int(value)
-    if number < 1:
-        raise argparse.ArgumentTypeError("must be at least 1")
-    return number
-
-
-def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
-    parser = argparse.ArgumentParser(
-        description="Download new invoice PDFs from S3 into a landing zone."
-    )
-    parser.add_argument("--dest", type=Path, default=HERE / "landing",
-                        help="landing directory (default: factures/landing)")
-    parser.add_argument("--env-file", type=Path, default=HERE / ".env",
-                        help="settings file (default: factures/.env)")
-    parser.add_argument("--prefix", default="", help="only pull keys with this prefix")
-    parser.add_argument("--limit", type=positive_int, help="pull at most N files")
-    parser.add_argument("--dry-run", action="store_true", help="list without downloading")
-    return parser.parse_args(argv)
-
-
-def main(argv: list[str] | None = None) -> int:
-    args = parse_args(argv)
-    logging.basicConfig(
-        level=logging.INFO, stream=sys.stderr, format="%(levelname)s %(message)s"
-    )
+def run(args: argparse.Namespace) -> int:
     logging.getLogger("botocore").setLevel(logging.WARNING)
     logging.getLogger("boto3").setLevel(logging.WARNING)
     try:
@@ -304,7 +277,3 @@ def main(argv: list[str] | None = None) -> int:
         return 2
     print(json.dumps(summary, ensure_ascii=False))
     return 1 if summary["failed"] else 0
-
-
-if __name__ == "__main__":
-    sys.exit(main())

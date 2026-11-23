@@ -17,11 +17,11 @@ from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
 import bad_workers
 
-from extraction import bronze as B
-from extraction import convert as V
-from extraction import ocr as O
-from extraction import pdf as F
-from extraction import worker as W
+from bronze import pipeline as V
+from bronze.extraction import ocr as O
+from bronze.extraction import pdf as F
+from bronze.extraction import worker as W
+from bronze.storage import store as B
 
 T = "Facture numero A-2025-0001\nSIRET 77360260298050 total TTC 36 973,80 euros\nMerci de votre confiance"
 
@@ -338,7 +338,7 @@ def test_lock(srv, land, tmp_path):
 
 def cli(*a, env=None):
     return subprocess.run(
-        [sys.executable, "-m", "extraction", *map(str, a)],
+        [sys.executable, "-m", "bronze", *map(str, a)],
         cwd=R,
         capture_output=True,
         text=True,
@@ -350,7 +350,7 @@ def test_kill9_then_resume(srv, tmp_path):
     l = tmp_path / "i"
     l.mkdir()
     o = tmp_path / "o"
-    srv.delay = 0.15
+    srv.delay = 0.6
     [(l / f"{i}.pdf").write_bytes(mk("scan", extra=str(i))) for i in range(6)]
     f = tmp_path / "e"
     f.write_text(f"OCR_KEY=k\nOCR_ENDPOINT={srv.url}\n")
@@ -358,7 +358,7 @@ def test_kill9_then_resume(srv, tmp_path):
         [
             sys.executable,
             "-m",
-            "extraction",
+            "bronze",
             "convert",
             str(l),
             "--out",
@@ -415,7 +415,7 @@ def test_child_never_prints_on_stdout():
         [
             sys.executable,
             "-c",
-            "import bad_workers\nfrom extraction.worker import PdfWorker\nif __name__=='__main__':\n  with PdfWorker() as w: print(w._call(bad_workers.chatty))",
+            "import bad_workers\nfrom bronze.extraction.worker import PdfWorker\nif __name__=='__main__':\n  with PdfWorker() as w: print(w._call(bad_workers.chatty))",
         ],
         capture_output=True,
         text=True,
@@ -594,7 +594,7 @@ def test_silver_newest_and_tamper(srv, land, tmp_path):
     run(land, o, eng(srv, max_side=2000))
     (land / "u.PDF").write_bytes(mk("text", extra="up"))
     run(land, o, eng(srv))
-    from silver.bronze import read_documents as fd
+    from silver.reader import read_documents as fd
 
     d, u = fd(o)
     assert len(d) == 3 and not u and any("second" in m for m, _ in d)

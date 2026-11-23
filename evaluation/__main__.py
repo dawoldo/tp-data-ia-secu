@@ -17,22 +17,20 @@ from decimal import Decimal
 from pathlib import Path
 from typing import Any
 
-from extraction.bronze import BronzeError, BronzeStore
-from extraction.convert import convert_folder
-from extraction.ocr import OcrConfigError, engine_from_env
-from silver.bronze import read_documents
-from silver.build import analyse
+from bronze.extraction.ocr import OcrConfigError, engine_from_env
+from bronze.pipeline import convert_folder
+from bronze.storage.store import BronzeError, BronzeStore
+from paths import BRONZE, ENV_FILE, LANDING
+from paths import EVALUATION as WORK
 from silver.models import Facture, LigneFacture, Partie, TotalTva
-from silver.parser import parse_invoice
+from silver.parsing.parser import parse_invoice
+from silver.reader import read_documents
+from silver.tables import analyse
 
 from .compare import Score
 from .report import render
 from .synth import pick, prepare
 
-ROOT = Path(__file__).resolve().parent.parent
-LANDING = ROOT / "factures" / "landing"
-BRONZE = ROOT / "factures" / "bronze"
-WORK = ROOT / "factures" / "evaluation"
 TRUTH = Path(__file__).parent / "verite" / "scans_reels.json"
 RESULTS = Path(__file__).parent / "resultats.md"
 DEFAULT_SIDE = 1540                  # the size the pipeline uses
@@ -146,7 +144,7 @@ def main(argv: list[str] | None = None) -> int:
                      help="image sizes to compare, in pixels (default: 650 800 1540 2339)")
     cmd.add_argument("--synthetic", type=int, default=20, help="synthetic scans (default 20)")
     cmd.add_argument("--no-ocr", action="store_true", help="only use results already there")
-    cmd.add_argument("--env-file", type=Path, default=ROOT / ".env")
+    cmd.add_argument("--env-file", type=Path, default=ENV_FILE)
     cmd.add_argument("--out", type=Path, default=RESULTS, help="where to save the tables")
     args = parser.parse_args(argv)
     logging.basicConfig(level=logging.INFO, stream=sys.stderr, format="%(levelname)s %(message)s")

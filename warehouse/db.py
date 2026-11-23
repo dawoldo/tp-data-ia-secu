@@ -1,8 +1,5 @@
 """SQL access to the bronze and silver tables, with DuckDB.
 
-    python -m warehouse.db build            # (re)create the database for DBeaver
-    python -m warehouse.db query "SQL"      # run a query from a terminal
-
 The data stays in the Parquet files; the database only holds views on them. Programs
 call connect(), which needs no database file: whoever has entrepot.duckdb open, in
 whatever mode, cannot block them.
@@ -10,16 +7,14 @@ whatever mode, cannot block them.
 
 from __future__ import annotations
 
-import argparse
 import os
-import sys
 import uuid
 from pathlib import Path
 
 import duckdb
 
-# Where the data is, whatever the machine or container.
-DATA = Path(os.environ.get("FACTURES_DIR") or Path(__file__).resolve().parent.parent / "factures")
+from paths import DATA
+
 DATABASE = "warehouse/entrepot.duckdb"
 
 # view -> (Parquet file, description)
@@ -37,11 +32,11 @@ VIEWS = {
     "silver.rejets": (
         "silver/rejets.parquet", "Quarantaine : documents écartés, avec le motif."),
     "bronze.extractions": (
-        "warehouse/bronze_extractions.parquet",
+        "bronze/tables/extractions.parquet",
         "Toutes les extractions : origine S3, réglages, empreintes. "
         "document_id + version = silver.factures.facture_id + bronze_version."),
     "bronze.pages": (
-        "warehouse/bronze_pages.parquet", "Texte brut extrait de chaque page."),
+        "bronze/tables/pages.parquet", "Texte brut extrait de chaque page."),
 }
 
 
@@ -55,7 +50,7 @@ def create_views(db: duckdb.DuckDBPyConnection, data: Path) -> None:
     for name, (file, description) in VIEWS.items():
         path = data.resolve() / file
         if not path.is_file():
-            raise FileNotFoundError(f"{path} is missing: run python -m warehouse.export_parquet")
+            raise FileNotFoundError(f"{path} is missing: run python -m warehouse refresh")
         db.execute(f"CREATE VIEW {name} AS SELECT * FROM read_parquet({_literal(str(path))})")
         db.execute(f"COMMENT ON VIEW {name} IS {_literal(description)}")
 
@@ -89,29 +84,3 @@ def build(data: Path = DATA) -> Path:
         for leftover in (tmp, tmp.with_name(tmp.name + ".wal")):
             leftover.unlink(missing_ok=True)
     return target
-
-
-def main(argv: list[str] | None = None) -> int:
-    parser = argparse.ArgumentParser(prog="warehouse.db", description="SQL access to the tables.")
-    commands = parser.add_subparsers(dest="command", required=True)
-    commands.add_parser("build", help="create the database for graphical tools")
-    cmd = commands.add_parser("query", help="run one query and print the result")
-    cmd.add_argument("sql")
-    args = parser.parse_args(argv)
-    try:
-        if args.command == "build":
-            path = build()
-            print(f"{path}: {len(VIEWS)} views")
-        else:
-            with connect() as db:
-                result = db.sql(args.sql)
-                if result is not None:
-                    print(result)
-    except (OSError, duckdb.Error) as exc:
-        print(f"error: {exc}", file=sys.stderr)
-        return 2
-    return 0
-
-
-if __name__ == "__main__":
-    sys.exit(main())

@@ -8,8 +8,8 @@ import pytest
 from common import BRONZE, COUNT, ROOT, SRC
 
 R = str(ROOT)
-from silver.parser import parse_amount as PA
-from silver.parser import parse_invoice as P
+from silver.parsing.parser import parse_amount as PA
+from silver.parsing.parser import parse_invoice as P
 
 FILES = [m for m, _ in SRC.values()]
 T, O, O1 = (

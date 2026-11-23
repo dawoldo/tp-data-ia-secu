@@ -8,7 +8,7 @@ from typing import Any
 
 import pymupdf
 
-from . import text_to_md
+from . import text
 from .classify import IMAGE, classify_page
 
 
@@ -70,7 +70,7 @@ def analyse(
                 if spec is not None:
                     info["image"] = render(page, spec)
             elif with_text:
-                info["markdown"], info["missing_words"] = text_to_md.page_to_markdown(doc, index)
+                info["markdown"], info["missing_words"] = text.page_to_markdown(doc, index)
             pages.append(info)
         kind = IMAGE if any(p["kind"] == IMAGE for p in pages) else "text"
         return {"kind": kind, "repaired": doc.is_repaired, "pages": pages}

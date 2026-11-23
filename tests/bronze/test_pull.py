@@ -1,4 +1,3 @@
-import importlib.util
 import json
 import os
 import subprocess
@@ -8,11 +7,7 @@ import pytest
 from common import ROOT
 from moto.server import ThreadedMotoServer
 
-SCRIPT = ROOT / "factures" / "pull-factures.py"
-spec = importlib.util.spec_from_file_location("pf", SCRIPT)
-pf = importlib.util.module_from_spec(spec)
-sys.modules["pf"] = pf
-spec.loader.exec_module(pf)
+from bronze.ingestion import pull as pf
 
 
 def pdf(t):
@@ -147,14 +142,16 @@ def cli(*a, **env):
     return subprocess.run(
         [
             sys.executable,
-            str(SCRIPT),
+            "-m",
+            "bronze",
+            "pull",
             *(() if "--env-file" in a else ("--env-file", "/nonexistent")),
             *map(str, a),
         ],
         env=e,
         capture_output=True,
         text=True,
-        cwd="/",
+        cwd=ROOT,
     )
 
 

@@ -3,17 +3,17 @@
 The pipeline downloads invoice PDFs from S3, converts them to Markdown, and turns them into checked, typed tables.
 
 ```
-S3 bucket ── pull-factures.py ──> factures/landing/ ── extraction convert ──> factures/bronze/
+S3 bucket ── bronze pull ──> data/landing/ ── bronze convert ──> data/bronze/documents/
                                                         ├─ text PDF: PyMuPDF
                                                         └─ scan: LightOnOCR-3
-factures/bronze/ ── silver build ──> factures/silver/  (tables, anomalies, quarantine)
-factures/bronze/ ── warehouse.export_parquet ──> factures/silver/ + factures/warehouse/  (all tables)
-those tables ── warehouse.db ──> SQL with DuckDB
+data/bronze/documents/ ── silver build ──> data/silver/  (tables, anomalies, quarantine)
+data/bronze/documents/ ── warehouse refresh ──> data/silver/ + data/bronze/tables/  (all tables)
+those tables ── warehouse ──> SQL with DuckDB
 ```
 
 Every step can be run again safely: finished work is skipped, failures are retried.
 
-> **Current state: bronze, silver and warehouse.** The pipeline covers steps 1 to 4 of `CONSIGNES.md`: download, text/scan detection, OCR, raw Markdown with its traceability record (`factures/bronze/`), then typed tables with quality checks and quarantine (`factures/silver/`). Step 5 (OCR evaluation) is in `evaluation/`. Step 6 (warehouse) is DuckDB over those tables. The MCP server and agent are not built yet.
+> **Current state: bronze, silver and warehouse.** The pipeline covers steps 1 to 4 of `CONSIGNES.md`: download, text/scan detection, OCR, raw Markdown with its traceability record (`data/bronze/documents/`), then typed tables with quality checks and quarantine (`data/silver/`). Step 5 (OCR evaluation) is in `evaluation/`. Step 6 (warehouse) is DuckDB over those tables. The MCP server and agent are not built yet.
 
 ## Setup
 
@@ -24,16 +24,16 @@ python3 -m venv .venv
 .venv/bin/pip install -r requirements.txt
 ```
 
-Create two settings files. Both are ignored by Git; never commit them. Values in these files take priority over environment variables.
+Create a `.env` file at the root. It is ignored by Git; never commit it. Its values take priority over environment variables.
 
-| File | Variable | Required | Default |
+| For | Variable | Required | Default |
 |---|---|---|---|
-| `factures/.env` | `AWS_ACCESS_KEY_ID` | yes | |
+| S3 | `AWS_ACCESS_KEY_ID` | yes | |
 | | `AWS_SECRET_ACCESS_KEY` | yes | |
 | | `AWS_ENDPOINT_URL` | no | the project's S3 gateway |
 | | `AWS_DEFAULT_REGION` | no | `us-east-1` |
 | | `S3_BUCKET` | no | `factures` |
-| `.env` | `OCR_KEY` | yes | |
+| OCR | `OCR_KEY` | yes | |
 | | `OCR_ENDPOINT` | yes | full URL, ending in `/chat/completions` |
 | | `OCR_MODEL` | no | `lightonocr-3-1b-test` |
 | | `OCR_ENGINE` | no | `lightonocr` |
@@ -41,13 +41,13 @@ Create two settings files. Both are ignored by Git; never commit them. Values in
 ## Quick start
 
 ```bash
-.venv/bin/python factures/pull-factures.py --limit 5   # download 5 new invoices
-.venv/bin/python -m extraction classify                # text or scan?
-.venv/bin/python -m extraction convert                 # fill the bronze layer
-.venv/bin/python -m extraction verify                  # check the bronze layer
+.venv/bin/python -m bronze pull --limit 5   # download 5 new invoices
+.venv/bin/python -m bronze classify                # text or scan?
+.venv/bin/python -m bronze convert                 # fill the bronze layer
+.venv/bin/python -m bronze verify                  # check the bronze layer
 .venv/bin/python -m silver build                       # check and build the silver tables
-.venv/bin/python -m warehouse.export_parquet           # silver + bronze tables
-.venv/bin/python -m warehouse.db build                  # database for DBeaver
+.venv/bin/python -m warehouse refresh           # silver + bronze tables
+.venv/bin/python -m warehouse build                  # database for DBeaver
 .venv/bin/python -m evaluation run                      # measure the OCR
 ```
 
@@ -57,28 +57,28 @@ Without `--limit`, the first command downloads everything new.
 
 Add `--help` to any command to list its arguments.
 
-### `factures/pull-factures.py`: download invoices
+### `python -m bronze pull`: download invoices
 
 Downloads new or changed PDFs and records each one in `manifest.json` (S3 key, ETag, SHA-256). Lost or damaged files are downloaded again. If an invoice changes under the same name, both versions are kept.
 
 | Argument | Effect | Default |
 |---|---|---|
-| `--dest DIR` | Where to save the PDFs | `factures/landing` |
+| `--dest DIR` | Where to save the PDFs | `data/landing` |
 | `--limit N` | Download at most N files | all |
 | `--prefix TEXT` | Only S3 keys starting with TEXT | all |
 | `--dry-run` | List what would be downloaded, save nothing | off |
-| `--env-file FILE` | S3 settings file | `factures/.env` |
+| `--env-file FILE` | Settings file | `.env` |
 
-### `python -m extraction classify`: text or scan
+### `python -m bronze classify`: text or scan
 
 Prints `text`, `image` or `error` for each PDF, with the reason. It looks at the content, not the file name. A PDF with at least one page that needs OCR is `image`. Writes nothing and makes no OCR call.
 
 | Argument | Effect | Default |
 |---|---|---|
-| `source` | PDF or folder | `factures/landing` |
+| `source` | PDF or folder | `data/landing` |
 | `--json` | One JSON line per file, with the measurements | off |
 
-### `python -m extraction ocr-page`: OCR one page
+### `python -m bronze ocr-page`: OCR one page
 
 Sends one page to the OCR model and prints the text, then the time and token usage. Saves nothing. Useful to check the model or compare settings.
 
@@ -90,21 +90,21 @@ Sends one page to the OCR model and prints the text, then the time and token usa
 | `--image-format png\|jpeg` | Image format sent to the model | `png` |
 | `--env-file FILE` | OCR settings file | `.env` |
 
-### `python -m extraction convert`: fill the bronze layer
+### `python -m bronze convert`: fill the bronze layer
 
 Reads text pages directly, sends the others to the OCR model, and adds the result to the bronze store. Nothing is ever replaced:
 
 - A PDF is recognized by its content. A known PDF is skipped, and one known under another name is only listed as a duplicate.
 - New settings add a version next to the old one, **so changing a setting sends every scan to the OCR again**. Check with `--dry-run`.
-- A PDF that differs from what `pull-factures.py` downloaded is refused.
+- A PDF that differs from what `bronze pull` downloaded is refused.
 - Parsing runs in a separate process: a PDF that crashes it, hangs or needs too much memory fails alone.
 - After 3 OCR outages in a row, scans wait for the next run and text PDFs continue.
 - Only one run at a time can write to a store.
 
 | Argument | Effect | Default |
 |---|---|---|
-| `source` | PDF or folder | `factures/landing` |
-| `--out DIR` | Bronze store | `factures/bronze` |
+| `source` | PDF or folder | `data/landing` |
+| `--out DIR` | Bronze store | `data/bronze/documents` |
 | `--dry-run` | Show what would be done and the number of OCR calls; write nothing | off |
 | `--limit N` | Stop after N new conversions | all |
 | `--no-ocr` | Convert text PDFs only; scans stay pending | off |
@@ -117,16 +117,16 @@ Reads text pages directly, sends the others to the OCR model, and adds the resul
 To compare OCR settings, use a separate store, because silver reads the newest version of each PDF:
 
 ```bash
-.venv/bin/python -m extraction convert --max-side 2339 --out factures/bronze-2339
+.venv/bin/python -m bronze convert --max-side 2339 --out data/bronze-2339
 ```
 
-### `python -m extraction verify`: check the bronze layer
+### `python -m bronze verify`: check the bronze layer
 
 Recomputes every hash and reports records that were modified, damaged or deleted. Changes nothing.
 
 | Argument | Effect | Default |
 |---|---|---|
-| `store` | Bronze store | `factures/bronze` |
+| `store` | Bronze store | `data/bronze/documents` |
 
 ### `python -m silver parse`: look at the extracted data
 
@@ -134,7 +134,7 @@ For inspection; `build` does not need it. Reads the bronze Markdown of text PDFs
 
 | Argument | Effect | Default |
 |---|---|---|
-| `source` | `.md` file or folder | `factures/bronze` |
+| `source` | `.md` file or folder | `data/bronze/documents` |
 | `--json` | One JSON line per invoice, with every field | off |
 
 | Group | Fields |
@@ -158,8 +158,8 @@ Parses every bronze document, checks it, and writes the tables. Each build start
 
 | Argument | Effect | Default |
 |---|---|---|
-| `source` | Bronze store | `factures/bronze` |
-| `--out DIR` | Where to write the tables | `factures/silver` |
+| `source` | Bronze store | `data/bronze/documents` |
+| `--out DIR` | Where to write the tables | `data/silver` |
 | `--dry-run` | Check only, write nothing | off |
 
 Each document ends in exactly one of three states. Values are never corrected.
@@ -197,25 +197,25 @@ The first run makes about 140 OCR calls (about 40 minutes); the next ones make n
 | `--out FILE` | Where to save the tables | `evaluation/resultats.md` |
 | `--env-file FILE` | OCR settings file | `.env` |
 
-Work files are in `factures/evaluation/`, apart from the real bronze and silver data.
+Work files are in `data/evaluation/`, apart from the real bronze and silver data.
 
-### `python -m warehouse.export_parquet`: every table as Parquet
+### `python -m bronze tables`: bronze as Parquet
 
-Prepares the warehouse. Does what `silver build` does, and adds the bronze tables with every extraction ever made (all versions). Tables are rebuilt each time; the bronze ones are read back and compared before they replace the previous ones. OCR evaluation runs are not included.
+Writes every extraction ever made (all versions) as two Parquet tables. They are rebuilt each time, and read back and compared before they replace the previous ones.
 
 | Argument | Effect | Default |
 |---|---|---|
-| `source` | Bronze store | `factures/bronze` |
-| `--silver DIR` | Where the silver tables are refreshed | `factures/silver` |
-| `--out DIR` | Where to write the bronze tables | `factures/warehouse` |
+| `store` | Bronze store | `data/bronze/documents` |
+| `--out DIR` | Where to write the tables | `data/bronze/tables` |
 
-### `python -m warehouse.db`: query with SQL
+### `python -m warehouse`: query with SQL
 
 DuckDB is an SQL database that runs inside a program, without a server, and reads Parquet files in place. The database holds **views only**: the data stays in the Parquet files, once. New data shows up without rebuilding.
 
 | Command | Effect |
 |---|---|
-| `build` | Create `factures/warehouse/entrepot.duckdb`, for graphical tools |
+| `refresh` | Rebuild all tables: `bronze tables`, then `silver build` |
+| `build` | Create `data/warehouse/entrepot.duckdb`, for graphical tools |
 | `query "SQL"` | Run one query and print the result |
 
 | View | Content |
@@ -224,22 +224,21 @@ DuckDB is an SQL database that runs inside a program, without a server, and read
 | `bronze.extractions`, `bronze.pages` | Bronze tables |
 
 ```bash
-.venv/bin/python -m warehouse.db query "SELECT statut, count(*), sum(total_ttc) FROM silver.factures WHERE statut_qualite = 'valide' GROUP BY ALL"
+.venv/bin/python -m warehouse query "SELECT statut, count(*), sum(total_ttc) FROM silver.factures WHERE statut_qualite = 'valide' GROUP BY ALL"
 ```
 
 - **From a program:** `from warehouse.db import connect`, then `connect().execute("SELECT ...")`. It does not open the database file, so a graphical tool cannot block it.
-- **From DBeaver:** create a DuckDB connection to `factures/warehouse/entrepot.duckdb`.
-- **On another machine or in a container:** run `build` there; do not copy the file, its views hold absolute paths. Set `FACTURES_DIR` if the data is not in `factures/`.
+- **From DBeaver:** create a DuckDB connection to `data/warehouse/entrepot.duckdb`.
+- **On another machine or in a container:** run `build` there; do not copy the file, its views hold absolute paths. Set `DATA_DIR` if the data is not in `data/`.
 
 ## Output
 
-| In `factures/warehouse/` (Parquet) | One row per |
+| In `data/bronze/tables/` (Parquet) | One row per |
 |---|---|
-| `bronze_extractions` | extraction: origin, settings, hashes |
-| `bronze_pages` | page: raw text, method, OCR time and tokens |
-| `entrepot.duckdb` | not a table: views for graphical tools, see `warehouse.db` |
+| `extractions` | extraction: origin, settings, hashes |
+| `pages` | page: raw text, method, OCR time and tokens |
 
-| In `factures/silver/` (Parquet) | One row per |
+| In `data/silver/` (Parquet) | One row per |
 |---|---|
 | `factures` | usable invoice, with its quality state and origin |
 | `lignes_facture` | invoice line |
@@ -249,7 +248,7 @@ DuckDB is an SQL database that runs inside a program, without a server, and read
 
 `facture_id` and `document_id` are the SHA-256 of the PDF, which is also its bronze folder. Amounts are exact decimals.
 
-| In `factures/bronze/` | Content |
+| In `data/bronze/documents/` | Content |
 |---|---|
 | `PDF_HASH/VERSION/NAME.pdf.md` | Markdown, with `<!-- page: N -->` before each page |
 | `PDF_HASH/VERSION/NAME.pdf.json` | Traceability: S3 key and ETag, hashes, class and reason, settings, OCR time and raw OCR response |
@@ -257,11 +256,11 @@ DuckDB is an SQL database that runs inside a program, without a server, and read
 | `sources.jsonl` | Every file and S3 key where each PDF was seen |
 | `errors.jsonl` | Every failure, with date and file |
 
-`PDF_HASH` is the SHA-256 of the PDF, `VERSION` a hash of the settings. To find an invoice: `find factures/bronze -name '*A-2025-0003*'`. The files are read-only; never edit or delete them.
+`PDF_HASH` is the SHA-256 of the PDF, `VERSION` a hash of the settings. To find an invoice: `find data/bronze/documents -name '*A-2025-0003*'`. The files are read-only; never edit or delete them.
 
 Markdown is kept as extracted, so tables are Markdown for text PDFs and can be HTML for scans.
 
-`pull-factures.py` and `convert` print a JSON summary on stdout. Logs go to stderr.
+`bronze pull` and `convert` print a JSON summary on stdout. Logs go to stderr.
 
 | Exit code | Meaning |
 |---|---|
@@ -282,7 +281,7 @@ About 2 minutes. The tests need no network, credentials or downloaded invoices: 
 
 | Message or field | What to do |
 |---|---|
-| `missing AWS_…` or `missing OCR_…` | Fill in the matching `.env` file |
+| `missing AWS_…` or `missing OCR_…` | Fill in `.env` |
 | `HTTP 503 … model_not_ready` | The model is stopped. Start it in Hyperfluid, then run `convert` again |
 | `HTTP 401`, `403` or `404` (OCR) | Check `OCR_KEY`, `OCR_ENDPOINT` and `OCR_MODEL` |
 | `pending_ocr` | Scans waiting for OCR; run `convert` again |
@@ -294,6 +293,6 @@ About 2 minutes. The tests need no network, credentials or downloaded invoices: 
 | `bloc d'adresse inattendu` | The name and address are not name, street, town. Check the PDF |
 | `introuvable`, `… illisible` | The label is missing, or the value has an unexpected format. Check the `.md` against the PDF |
 | `another run is using …` | Wait for the other `convert` to finish |
-| `differs from what was downloaded` | The PDF was changed locally. Run `pull-factures.py` again |
-| `bronze_inutilisable` | The bronze record was changed or deleted. Run `extraction verify` |
-| `… is missing: run python -m warehouse.export_parquet` | The Parquet tables have not been created yet |
+| `differs from what was downloaded` | The PDF was changed locally. Run `bronze pull` again |
+| `bronze_inutilisable` | The bronze record was changed or deleted. Run `bronze verify` |
+| `… is missing: run python -m warehouse refresh` | The Parquet tables have not been created yet |

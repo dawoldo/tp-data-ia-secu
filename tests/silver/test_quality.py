@@ -9,7 +9,7 @@ import pytest
 from common import BRONZE, COUNT, ROOT, SRC, A, B, Bz, sub
 
 R = str(ROOT)
-from silver.build import analyse, summary, write
+from silver.tables import analyse, summary, write
 
 
 @pytest.fixture

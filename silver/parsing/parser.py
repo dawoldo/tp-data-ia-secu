@@ -16,10 +16,17 @@ from datetime import date
 from decimal import Decimal
 from typing import Any
 
-from .markdown import Block, Table, clean, fold, read_blocks
-from .models import (
-    ERROR, WARNING, Facture, Issue, LigneFacture, ParseResult, Partie, TotalTva,
+from ..models import (
+    ERROR,
+    WARNING,
+    Facture,
+    Issue,
+    LigneFacture,
+    ParseResult,
+    Partie,
+    TotalTva,
 )
+from .markdown import Block, clean, fold, read_blocks
 
 # --- Values -----------------------------------------------------------------
 

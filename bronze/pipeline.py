@@ -6,67 +6,21 @@ Known PDFs are skipped, whatever their name; failures are retried next time.
 from __future__ import annotations
 
 import contextlib
-import json
 import logging
 from pathlib import Path
 from typing import Any
 
-from . import text_to_md
-from .bronze import BronzeError, BronzeStore, DamagedRecord, now, sha256
-from .classify import IMAGE
-from .ocr import OcrEngine, OcrError, OcrUnavailable
-from .pdf import PdfError, find_pdfs
-from .worker import PdfWorker
+from .extraction import text
+from .extraction.classify import IMAGE
+from .extraction.ocr import OcrEngine, OcrError, OcrUnavailable
+from .extraction.pdf import PdfError, find_pdfs
+from .extraction.worker import PdfWorker
+from .ingestion.manifest import Landing
+from .storage.store import BronzeStore, DamagedRecord, now, sha256
 
 log = logging.getLogger(__name__)
 
 MAX_CONSECUTIVE_OUTAGES = 3
-MANIFEST_NAME = "manifest.json"
-
-
-class Landing:
-    """Where PDFs come from, according to the manifest of pull-factures.py."""
-
-    def __init__(self, source: Path) -> None:
-        source = source.resolve()
-        self.root = source.parent if source.is_file() else source
-        self._entries: dict[str, dict[str, Any]] = {}
-        if (self.root / MANIFEST_NAME).is_file():
-            self._entries = self._read(self.root / MANIFEST_NAME)
-            return
-        # Part of a landing zone? Only trust a manifest that knows these files.
-        for folder in self.root.parents:
-            if (folder / MANIFEST_NAME).is_file():
-                with contextlib.suppress(BronzeError):
-                    entries = self._read(folder / MANIFEST_NAME)
-                    if any((folder / name).is_relative_to(source) for name in entries):
-                        self.root, self._entries = folder, entries
-                        return
-
-    @staticmethod
-    def _read(path: Path) -> dict[str, dict[str, Any]]:
-        entries = {}
-        try:
-            for key, versions in json.loads(path.read_text(encoding="utf-8")).items():
-                for v in versions:
-                    entries[v["path"]] = {
-                        "s3_key": key, "sha256": v["sha256"],
-                        **{k: v[k] for k in ("etag", "last_modified", "pulled_at")},
-                    }
-        except (ValueError, KeyError, TypeError, AttributeError) as exc:
-            raise BronzeError(f"unreadable manifest {path}: {exc!r}") from exc
-        return entries
-
-    def name(self, path: Path) -> str:
-        return path.resolve().relative_to(self.root).as_posix()
-
-    def origin(self, name: str, digest: str) -> dict[str, Any] | None:
-        entry = self._entries.get(name)
-        if entry is None:
-            return None
-        if entry["sha256"] != digest:
-            raise PdfError("differs from what was downloaded; run pull-factures.py again")
-        return {k: v for k, v in entry.items() if k != "sha256"}
 
 
 def extract(
@@ -91,7 +45,7 @@ def extract(
         else:
             markdown = info.pop("markdown")
             info["method"] = "text"
-            settings["text"] = text_to_md.SETTINGS
+            settings["text"] = text.SETTINGS
         # Text that imitates our page marker must not create a fake page.
         markdown = markdown.replace("<!-- page:", "<!-- page :")
         parts.append(f"<!-- page: {info['page']} -->\n\n{markdown}\n")
@@ -116,7 +70,7 @@ def convert_folder(
         "text": 0, "image": 0, "skipped": 0, "duplicates": [], "repaired": [],
         "pending_ocr": [], "damaged": [], "failed": {}, "ocr_calls": 0, "dry_run": dry_run,
     }
-    current = {"text": text_to_md.SETTINGS, "ocr": engine.settings if engine else None}
+    current = {"text": text.SETTINGS, "ocr": engine.settings if engine else None}
 
     def accept(settings: dict[str, Any]) -> bool:
         return all(current[m] is None or current[m] == s for m, s in settings.items())

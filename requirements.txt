@@ -1,0 +1,6 @@
+boto3==1.44.9
+duckdb==2.0.1
+numpy==2.5.5
+pymupdf==2.1
+python-dotenv==1.2.4
+requests==2.34.2
